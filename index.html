@@ -2,302 +2,118 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>بازاریکو | یک بازار، همه معاملات</title>
-
 <style>
 *{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:tahoma,Arial;
-background:#f7f8fb;
-color:#17213b;
-}
-
-header{
-background:linear-gradient(135deg,#101a35,#26395f);
-color:white;
-padding:30px 18px;
-border-bottom:5px solid #d4af37;
-border-radius:0 0 25px 25px;
-}
-
-.logo{
-font-size:30px;
-font-weight:bold;
-}
-
-header p{
-color:#eee;
-font-size:14px;
-}
-
-.search{
-width:100%;
-padding:15px;
-border:2px solid #d4af37;
-border-radius:12px;
-margin-top:18px;
-font-size:15px;
-}
-
-h2{
-margin:25px 15px 15px;
-color:#17213b;
-}
-
-.categories{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:13px;
-padding:0 15px;
-}
-
-.card{
-background:white;
-padding:22px 8px;
-border:1px solid #e5e7ed;
-border-top:4px solid #d4af37;
-border-radius:16px;
-text-align:center;
-box-shadow:0 4px 12px #101a3510;
-}
-
-.icon{
-font-size:35px;
-}
-
-.card h3{
-font-size:15px;
-margin:10px 0;
-}
-
-.card p{
-font-size:12px;
-color:#687084;
-}
-
-.banner{
-margin:25px 15px;
-padding:25px 15px;
-background:#f5f0df;
-border:1px solid #e5d7a4;
-border-radius:17px;
-text-align:center;
-}
-
-button{
-background:#d4af37;
-color:#17213b;
-border:0;
-padding:13px 22px;
-border-radius:10px;
-font-size:15px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.ad-form{
-background:white;
-margin:25px 15px;
-padding:20px;
-border-radius:16px;
-box-shadow:0 4px 15px #101a3510;
-}
-
-.ad-form input,
-.ad-form select,
-.ad-form textarea{
-width:100%;
-padding:13px;
-margin:8px 0;
-border:1px solid #dce0e8;
-border-radius:10px;
-font-family:tahoma;
-font-size:14px;
-}
-
-.ad-form textarea{
-height:100px;
-resize:vertical;
-}
-
-.ad-form button{
-width:100%;
-margin-top:10px;
-}
-
-footer{
-background:#101a35;
-color:white;
-text-align:center;
-padding:25px;
-font-size:13px;
-margin-top:30px;
-}
-
-.hidden{
-display:none;
-}
-
-@media(min-width:650px){
-.categories{
-grid-template-columns:repeat(3,1fr);
-}
-}
+body{margin:0;font-family:tahoma,Arial;background:#f5f6fa;color:#17213b}
+header{background:linear-gradient(135deg,#101a35,#26395f);color:white;padding:22px 18px 35px;border-bottom:5px solid #d4af37;border-radius:0 0 25px 25px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{font-size:27px;font-weight:bold}
+.tag{font-size:12px;color:#e7d28b}
+.hero{padding:28px 5px 15px}
+.hero h1{font-size:24px;line-height:1.8;margin:0}
+.hero p{font-size:13px;color:#e0e4ed;line-height:2}
+.search{width:100%;padding:15px;border:0;border-radius:12px;font:14px Tahoma;margin-top:12px}
+.btn{display:inline-block;background:#d4af37;color:#17213b;padding:13px 20px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:14px}
+main{max-width:850px;margin:auto}
+h2{font-size:18px;margin:25px 16px 13px}
+.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;padding:0 15px}
+.card{background:white;border:1px solid #e5e7ed;border-radius:14px;padding:14px 9px;text-align:center;text-decoration:none;color:#17213b;box-shadow:0 4px 12px #101a3509;transition:.2s}
+.card:active{transform:scale(.97)}
+.icon{font-size:27px}
+.card h3{font-size:13px;margin:8px 0}
+.card p{font-size:10px;color:#747b8d;margin:0}
+.banner{margin:25px 15px;padding:23px 16px;background:linear-gradient(120deg,#f8f0d8,#fffaf0);border:1px solid #e8d9a9;border-radius:17px;text-align:center}
+.banner h3{margin:0 0 10px}
+.banner p{font-size:12px;color:#656b78;line-height:2}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 15px}
+.step{background:white;border-radius:12px;padding:14px 7px;text-align:center;font-size:11px;line-height:2}
+.step b{display:block;font-size:20px}
+.cta{text-align:center;margin:25px 15px;background:#101a35;color:white;padding:23px 12px;border-radius:16px}
+.cta p{font-size:12px;color:#e2e5ec;line-height:2}
+footer{margin-top:30px;background:#101a35;color:#ddd;text-align:center;padding:22px;font-size:12px}
+.hidden{display:none}
+@media(min-width:650px){.categories{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
-
 <body>
 
 <header>
+<div class="top">
 <div class="logo">بازاریکو 🛒</div>
-<p>یک بازار، همه معاملات</p>
+<div class="tag">یک بازار، همه معاملات</div>
+</div>
 
-<input
-class="search"
-id="search"
-type="search"
-placeholder="دنبال چی می‌گردی؟"
->
+<div class="hero">
+<h1>بازار معاملات بزرگ ایران</h1>
+<p>از طلا و خودرو تا ملک، کارخانه و آهن؛ فرصت‌های خرید و فروش را یک‌جا پیدا کن.</p>
+<a class="btn" href="ad.html">＋ ثبت آگهی رایگان</a>
+</div>
+
+<input class="search" id="search" type="search" placeholder="جست‌وجو در بازاریکو...">
 </header>
 
+<main>
 <h2>دسته‌بندی بازار</h2>
 
 <div class="categories" id="categories">
+<a class="card" href="ad.html?category=خودرو">
+<div class="icon">🚗</div><h3>خودرو</h3><p>خرید و فروش خودرو</p>
+</a>
 
-<div class="card">
-<div class="icon">🚗</div>
-<h3>خودرو</h3>
-<p>خرید و فروش خودرو</p>
+<a class="card" href="ad.html?category=ملک و زمین">
+<div class="icon">🏡</div><h3>ملک و زمین</h3><p>خرید، فروش و سرمایه‌گذاری</p>
+</a>
+
+<a class="card" href="ad.html?category=طلا و جواهر">
+<div class="icon">🥇</div><h3>طلا و جواهر</h3><p>معاملات طلا و فلزات گران‌بها</p>
+</a>
+
+<a class="card" href="ad.html?category=کارخانه و کسب‌وکار">
+<div class="icon">🏭</div><h3>کارخانه و کسب‌وکار</h3><p>خرید و فروش مجموعه‌ها</p>
+</a>
+
+<a class="card" href="ad.html?category=آهن و فلزات">
+<div class="icon">🔩</div><h3>آهن و فلزات</h3><p>معاملات صنعتی</p>
+</a>
+
+<a class="card" href="ad.html?category=اجاره ویلا">
+<div class="icon">🏖️</div><h3>اجاره ویلا</h3><p>اجاره و رزرو ویلا</p>
+</a>
 </div>
 
-<div class="card">
-<div class="icon">🏡</div>
-<h3>ملک و زمین</h3>
-<p>خرید، فروش و سرمایه‌گذاری</p>
-</div>
-
-<div class="card">
-<div class="icon">🥇</div>
-<h3>طلا و جواهر</h3>
-<p>معاملات طلا و فلزات گران‌بها</p>
-</div>
-
-<div class="card">
-<div class="icon">🏭</div>
-<h3>کارخانه و کسب‌وکار</h3>
-<p>خرید و فروش مجموعه‌ها</p>
-</div>
-
-<div class="card">
-<div class="icon">🔩</div>
-<h3>آهن و فلزات</h3>
-<p>معاملات صنعتی</p>
-</div>
-
-<div class="card">
-<div class="icon">🏖️</div>
-<h3>اجاره ویلا</h3>
-<p>اجاره و رزرو ویلا</p>
-</div>
-
-</div>
-
-<div class="banner">
-<h3>بازار بزرگ ایران، در یک جا</h3>
-<p>معاملات بزرگ را هوشمندانه انجام بده.</p>
-<button onclick="document.getElementById('ad').scrollIntoView({behavior:'smooth'})">
-شروع معامله
-</button>
-</div>
-
-<section class="ad-form" id="ad">
-
-<h2>ثبت آگهی در بازاریکو</h2>
-
-<form id="adForm">
-
-<input
-type="text"
-placeholder="عنوان آگهی"
-required
->
-
-<select required>
-<option value="">انتخاب دسته‌بندی</option>
-<option>خودرو</option>
-<option>ملک و زمین</option>
-<option>طلا و جواهر</option>
-<option>کارخانه و کسب‌وکار</option>
-<option>آهن و فلزات</option>
-<option>اجاره ویلا</option>
-</select>
-
-<input
-type="number"
-placeholder="قیمت به تومان"
-min="0"
-required
->
-
-<textarea
-placeholder="توضیحات آگهی"
-required
-></textarea>
-
-<input
-type="file"
-accept="image/*"
->
-
-<input
-type="tel"
-placeholder="شماره تماس"
-required
->
-
-<button type="submit">ثبت آگهی</button>
-
-</form>
-
+<section class="banner">
+<h3>معامله بزرگ، شروعی ساده</h3>
+<p>آگهی خود را ثبت کن و فرصت معامله را در بازاریکو ایجاد کن.</p>
+<a class="btn" href="ad.html">شروع ثبت آگهی</a>
 </section>
 
-<footer>
-بازاریکو | یک بازار، همه معاملات
-</footer>
+<h2>چطور کار می‌کند؟</h2>
+<div class="steps">
+<div class="step"><b>۱</b>انتخاب دسته‌بندی</div>
+<div class="step"><b>۲</b>ثبت مشخصات آگهی</div>
+<div class="step"><b>۳</b>ارتباط با خریدار</div>
+</div>
+
+<div class="cta">
+<h3>آماده شروع معامله‌ای؟</h3>
+<p>آگهی خودت را در بازاریکو آماده کن.</p>
+<a class="btn" href="ad.html">ثبت آگهی</a>
+</div>
+</main>
+
+<footer>بازاریکو | یک بازار، همه معاملات</footer>
 
 <script>
-const search = document.getElementById("search");
-const cards = document.querySelectorAll(".card");
-
-search.addEventListener("input", function(){
-
-const value = this.value.trim();
-
-cards.forEach(card => {
-
-const text = card.innerText;
-
-card.classList.toggle(
-"hidden",
-!text.includes(value)
-);
-
+const search=document.getElementById("search");
+const cards=document.querySelectorAll(".card");
+search.addEventListener("input",()=>{
+const value=search.value.trim().toLowerCase();
+cards.forEach(card=>{
+card.classList.toggle("hidden",!card.innerText.toLowerCase().includes(value));
 });
-
 });
-
-document.getElementById("adForm").addEventListener("submit", function(e){
-
-e.preventDefault();
-
-alert("فرم شما آماده است. برای ثبت واقعی آگهی، باید سامانه ذخیره‌سازی به سایت متصل شود.");
-
-});
-
 </script>
-
 </body>
 </html>
