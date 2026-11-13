@@ -8,73 +8,78 @@
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;
- font-family:Tahoma,Arial,sans-serif;
- background:#f3f5f8;
- color:#17243b;
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:#f3f5f8;
+  color:#17243b;
 }
 header{
- background:#14243d;
- color:white;
- padding:22px 15px;
- text-align:center;
- border-bottom:4px solid #d9ad45;
+  background:#14243d;
+  color:white;
+  padding:22px 15px;
+  text-align:center;
 }
-header h1{margin:0;font-size:25px}
-header p{margin:10px 0 0;color:#e5c875}
+header h1{margin:0;color:#e6bd55}
+header p{margin:8px 0 0;font-size:13px}
 .container{
- max-width:650px;
- margin:25px auto;
- padding:20px;
+  max-width:600px;
+  margin:22px auto;
+  padding:0 14px;
 }
 .card{
- background:white;
- padding:22px;
- border-radius:16px;
- box-shadow:0 5px 22px #00000010;
+  background:white;
+  padding:22px;
+  border-radius:16px;
+  box-shadow:0 4px 18px #0000000c;
 }
-h2{margin-top:0;color:#14243d}
+h2{margin-top:0;font-size:20px}
 label{
- display:block;
- margin:17px 0 8px;
- font-weight:bold;
+  display:block;
+  margin:17px 0 8px;
+  font-weight:bold;
+  font-size:14px;
 }
 input,select,textarea{
- width:100%;
- padding:13px;
- border:1px solid #d8dce4;
- border-radius:9px;
- font-family:inherit;
- font-size:15px;
- background:white;
+  width:100%;
+  padding:14px;
+  border:1px solid #dce1e8;
+  border-radius:10px;
+  font-family:inherit;
+  font-size:15px;
+  background:#fff;
 }
 textarea{min-height:110px;resize:vertical}
+#priceWords{
+  color:#16834a;
+  font-weight:bold;
+  margin-top:9px;
+  min-height:22px;
+  font-size:14px;
+}
 button{
- width:100%;
- padding:15px;
- margin-top:22px;
- border:0;
- border-radius:10px;
- background:#d9ad45;
- color:#14243d;
- font-size:17px;
- font-weight:bold;
- cursor:pointer;
+  width:100%;
+  margin-top:22px;
+  padding:15px;
+  border:0;
+  border-radius:10px;
+  background:#d6aa38;
+  color:#14243d;
+  font-family:inherit;
+  font-weight:bold;
+  font-size:16px;
 }
 .note{
- background:#fff8e8;
- padding:12px;
- border-radius:9px;
- font-size:13px;
- line-height:2;
- margin-top:15px;
+  margin-top:15px;
+  color:#777;
+  font-size:12px;
+  line-height:2;
 }
 .back{
- display:block;
- text-align:center;
- margin-top:18px;
- color:#14243d;
- text-decoration:none;
+  display:block;
+  text-align:center;
+  margin:20px;
+  color:#14243d;
+  text-decoration:none;
 }
 </style>
 </head>
@@ -82,84 +87,210 @@ button{
 <body>
 
 <header>
-<h1>بازاریکو</h1>
-<p>یک بازار، همه معاملات</p>
+  <h1>بازاریکو</h1>
+  <p>یک بازار، همه معاملات</p>
 </header>
 
 <div class="container">
 <div class="card">
 
 <h2>ثبت آگهی جدید</h2>
-<p>اطلاعات کالای خود را وارد کنید.</p>
 
 <form id="adForm">
 
 <label>دسته‌بندی آگهی</label>
 <select id="category" required>
-<option value="">انتخاب کنید</option>
-<option value="طلا و جواهر">طلا و جواهر</option>
-<option value="آهن و فلزات">آهن و فلزات</option>
-<option value="خودرو">خودرو</option>
-<option value="ملک و زمین">ملک و زمین</option>
-<option value="اجاره ویلا">اجاره ویلا</option>
-<option value="کارخانه و کسب‌وکار">کارخانه و کسب‌وکار</option>
+  <option value="">انتخاب کنید</option>
+  <option>طلا و فلزات گران‌بها</option>
+  <option>خودرو</option>
+  <option>ملک و زمین</option>
+  <option>اجاره ویلا</option>
+  <option>خرید و فروش کسب‌وکار</option>
+  <option>کارخانه</option>
+  <option>آهن و فلزات صنعتی</option>
 </select>
 
 <label>عنوان آگهی</label>
-<input id="title" type="text" placeholder="مثلاً فروش آپارتمان در تهران" required>
+<input id="title" type="text"
+placeholder="مثلاً فروش زمین ۱۰۰۰ متری"
+required>
 
 <label>قیمت (تومان)</label>
-<input id="price" type="number" min="0" placeholder="قیمت را وارد کنید" required>
+<input id="price" type="text"
+inputmode="numeric"
+placeholder="مثلاً ۲/۰۰۰/۰۰۰/۰۰۰"
+required>
+
+<div id="priceWords"></div>
 
 <label>شهر</label>
-<input id="city" type="text" placeholder="نام شهر" required>
+<input id="city" type="text"
+placeholder="نام شهر"
+required>
 
 <label>شماره تماس</label>
-<input id="phone" type="tel" placeholder="شماره تماس" required>
+<input id="phone" type="tel"
+inputmode="tel"
+placeholder="شماره موبایل"
+required>
 
 <label>توضیحات آگهی</label>
-<textarea id="description" placeholder="توضیحات کامل محصول یا ملک خود را بنویسید..." required></textarea>
+<textarea id="description"
+placeholder="مشخصات و توضیحات آگهی را بنویسید..."
+required></textarea>
 
-<button type="submit">ذخیره پیش‌نویس آگهی</button>
+<button type="submit">ثبت آگهی</button>
 
 </form>
 
-<div class="note">
-توجه: در نسخه فعلی اطلاعات آگهی فقط به‌صورت پیش‌نویس روی همین دستگاه ذخیره می‌شود و هنوز برای عموم منتشر نمی‌شود.
+<p class="note">
+آگهی شما فعلاً به‌صورت پیش‌نویس در این دستگاه ذخیره می‌شود و هنوز عمومی منتشر نمی‌شود.
+</p>
+
+</div>
 </div>
 
 <a class="back" href="index.html">بازگشت به صفحه اصلی</a>
 
-</div>
-</div>
-
 <script>
-const params = new URLSearchParams(window.location.search);
-const selectedCategory = params.get("category");
+const priceInput = document.getElementById("price");
+const priceWords = document.getElementById("priceWords");
 
-if(selectedCategory){
- document.getElementById("category").value = selectedCategory;
+const digits = "۰۱۲۳۴۵۶۷۸۹";
+
+function toEnglishNumber(value){
+  return value
+    .replace(/[۰-۹]/g, d => digits.indexOf(d))
+    .replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
 }
 
-document.getElementById("adForm").addEventListener("submit", function(e){
- e.preventDefault();
+function threeDigits(value){
+  return value.replace(/\B(?=(\d{3})+(?!\d))/g, "/");
+}
 
- const ad = {
-  category: document.getElementById("category").value,
-  title: document.getElementById("title").value,
-  price: document.getElementById("price").value,
-  city: document.getElementById("city").value,
-  phone: document.getElementById("phone").value,
-  description: document.getElementById("description").value,
-  date: new Date().toISOString()
- };
+const ones = [
+"", "یک", "دو", "سه", "چهار", "پنج",
+"شش", "هفت", "هشت", "نه"
+];
 
- let ads = JSON.parse(localStorage.getItem("bazariko_ads") || "[]");
- ads.push(ad);
- localStorage.setItem("bazariko_ads", JSON.stringify(ads));
+const teens = [
+"ده", "یازده", "دوازده", "سیزده", "چهارده",
+"پانزده", "شانزده", "هفده", "هجده", "نوزده"
+];
 
- alert("پیش‌نویس آگهی با موفقیت ذخیره شد.");
- this.reset();
+const tens = [
+"", "", "بیست", "سی", "چهل", "پنجاه",
+"شصت", "هفتاد", "هشتاد", "نود"
+];
+
+const hundreds = [
+"", "صد", "دویست", "سیصد", "چهارصد",
+"پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد"
+];
+
+function threeToWords(n){
+  if(n === 0) return "";
+
+  let parts = [];
+  let h = Math.floor(n / 100);
+  let r = n % 100;
+
+  if(h) parts.push(hundreds[h]);
+
+  if(r >= 10 && r < 20){
+    parts.push(teens[r - 10]);
+  } else {
+    let t = Math.floor(r / 10);
+    let o = r % 10;
+    if(t) parts.push(tens[t]);
+    if(o) parts.push(ones[o]);
+  }
+
+  return parts.join(" و ");
+}
+
+function numberToWords(n){
+  if(n === 0) return "صفر";
+
+  const scales = [
+    "",
+    "هزار",
+    "میلیون",
+    "میلیارد",
+    "تریلیون"
+  ];
+
+  let parts = [];
+  let i = 0;
+
+  while(n > 0){
+    let chunk = n % 1000;
+
+    if(chunk){
+      let text = threeToWords(chunk);
+      if(scales[i]) text += " " + scales[i];
+      parts.unshift(text);
+    }
+
+    n = Math.floor(n / 1000);
+    i++;
+  }
+
+  return parts.join(" و ");
+}
+
+priceInput.addEventListener("input", function(){
+  let raw = toEnglishNumber(this.value);
+  raw = raw.replace(/\D/g, "");
+
+  if(!raw){
+    this.value = "";
+    priceWords.innerText = "";
+    return;
+  }
+
+  this.value = threeDigits(raw);
+
+  let number = Number(raw);
+
+  if(Number.isSafeInteger(number)){
+    priceWords.innerText =
+      numberToWords(number) + " تومان";
+  } else {
+    priceWords.innerText = "مبلغ واردشده بسیار بزرگ است";
+  }
+});
+
+document.getElementById("adForm")
+.addEventListener("submit", function(e){
+
+  e.preventDefault();
+
+  const rawPrice = toEnglishNumber(priceInput.value)
+    .replace(/\D/g, "");
+
+  const ad = {
+    category: document.getElementById("category").value,
+    title: document.getElementById("title").value,
+    price: rawPrice,
+    city: document.getElementById("city").value,
+    phone: document.getElementById("phone").value,
+    description: document.getElementById("description").value,
+    date: new Date().toISOString()
+  };
+
+  let ads = JSON.parse(
+    localStorage.getItem("bazariko_ads") || "[]"
+  );
+
+  ads.push(ad);
+
+  localStorage.setItem("bazariko_ads", JSON.stringify(ads));
+
+  alert("آگهی شما به‌صورت پیش‌نویس ذخیره شد.");
+
+  this.reset();
+  priceWords.innerText = "";
 });
 </script>
 
