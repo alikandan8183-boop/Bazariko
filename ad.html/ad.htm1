@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ثبت آگهی | بازاریکو</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:tahoma,Arial;background:#f4f6fa;color:#17213b}
+header{background:linear-gradient(135deg,#101a35,#26395f);color:white;padding:25px 18px;border-bottom:4px solid #d4af37}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:650px;margin:25px auto;padding:0 15px}
+.panel{background:white;border:1px solid #e4e7ee;border-radius:17px;padding:20px;box-shadow:0 8px 25px #15213b0d}
+h1{font-size:22px}
+label{display:block;font-size:13px;font-weight:bold;margin:15px 0 7px}
+input,select,textarea{width:100%;padding:13px;border:1px solid #d9deea;border-radius:10px;font:14px Tahoma}
+textarea{min-height:100px}
+button{width:100%;border:0;border-radius:10px;background:#d4af37;color:#17213b;font:bold 15px Tahoma;padding:15px;margin-top:20px}
+.note{background:#fff8e5;border:1px solid #f0dfa9;border-radius:10px;padding:12px;font-size:12px;line-height:2;margin-top:17px}
+.back{display:inline-block;color:#d4af37;margin-top:17px;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+<a href="index.html">← بازگشت به بازاریکو</a>
+<h1>ثبت آگهی در بازاریکو</h1>
+<p>مشخصات معامله خود را وارد کنید.</p>
+</header>
+
+<main class="wrap">
+<div class="panel">
+<form id="adForm">
+
+<label>دسته‌بندی آگهی</label>
+<select id="category" required>
+<option value="">انتخاب دسته‌بندی</option>
+<option>خودرو</option>
+<option>ملک و زمین</option>
+<option>طلا و جواهر</option>
+<option>کارخانه و کسب‌وکار</option>
+<option>آهن و فلزات</option>
+<option>اجاره ویلا</option>
+</select>
+
+<label>عنوان آگهی</label>
+<input id="title" required placeholder="مثلاً فروش آپارتمان">
+
+<label>قیمت به تومان</label>
+<input id="price" placeholder="قیمت یا توافقی">
+
+<label>شهر</label>
+<input id="city" required placeholder="نام شهر">
+
+<label>توضیحات</label>
+<textarea id="details" required placeholder="مشخصات و توضیحات معامله"></textarea>
+
+<label>شماره تماس</label>
+<input id="phone" type="tel" required placeholder="شماره تماس">
+
+<button type="submit">ذخیره پیش‌نویس آگهی</button>
+</form>
+
+<div class="note">
+توجه: فعلاً آگهی فقط به‌صورت پیش‌نویس روی همین دستگاه ذخیره می‌شود و در سایت عمومی منتشر نمی‌شود. برای انتشار واقعی باید سامانه ثبت آگهی و پایگاه داده به سایت متصل شود.
+</div>
+
+<a class="back" href="index.html">بازگشت به صفحه اصلی</a>
+</div>
+</main>
+
+<script>
+const params=new URLSearchParams(location.search);
+if(params.get("category"))document.getElementById("category").value=params.get("category");
+
+document.getElementById("adForm").addEventListener("submit",function(e){
+e.preventDefault();
+const ad={
+category:document.getElementById("category").value,
+title:document.getElementById("title").value,
+price:document.getElementById("price").value,
+city:document.getElementById("city").value,
+details:document.getElementById("details").value,
+phone:document.getElementById("phone").value
+};
+const ads=JSON.parse(localStorage.getItem("bazarikoDrafts")||"[]");
+ads.push(ad);
+localStorage.setItem("bazarikoDrafts",JSON.stringify(ads));
+alert("پیش‌نویس روی این دستگاه ذخیره شد؛ هنوز عمومی منتشر نشده است.");
+this.reset();
+});
+</script>
+</body>
+</html>
