@@ -2,297 +2,302 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ثبت آگهی | بازاریکو</title>
-
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Tahoma,Arial,sans-serif;
-  background:#f3f5f8;
-  color:#17243b;
-}
-header{
-  background:#14243d;
-  color:white;
-  padding:22px 15px;
-  text-align:center;
-}
-header h1{margin:0;color:#e6bd55}
-header p{margin:8px 0 0;font-size:13px}
-.container{
-  max-width:600px;
-  margin:22px auto;
-  padding:0 14px;
-}
-.card{
-  background:white;
-  padding:22px;
-  border-radius:16px;
-  box-shadow:0 4px 18px #0000000c;
-}
-h2{margin-top:0;font-size:20px}
-label{
-  display:block;
-  margin:17px 0 8px;
-  font-weight:bold;
-  font-size:14px;
-}
-input,select,textarea{
-  width:100%;
-  padding:14px;
-  border:1px solid #dce1e8;
-  border-radius:10px;
-  font-family:inherit;
-  font-size:15px;
-  background:#fff;
-}
-textarea{min-height:110px;resize:vertical}
-#priceWords{
-  color:#16834a;
-  font-weight:bold;
-  margin-top:9px;
-  min-height:22px;
-  font-size:14px;
-}
-button{
-  width:100%;
-  margin-top:22px;
-  padding:15px;
-  border:0;
-  border-radius:10px;
-  background:#d6aa38;
-  color:#14243d;
-  font-family:inherit;
-  font-weight:bold;
-  font-size:16px;
-}
-.note{
-  margin-top:15px;
-  color:#777;
-  font-size:12px;
-  line-height:2;
-}
-.back{
-  display:block;
-  text-align:center;
-  margin:20px;
-  color:#14243d;
-  text-decoration:none;
-}
+body{margin:0;font-family:tahoma;background:#f3f5f8;color:#17243b}
+header{background:#14243d;color:white;text-align:center;padding:20px}
+header h1{color:#e6bd55;margin:0}
+.container{max-width:680px;margin:20px auto;padding:0 14px}
+.hero{height:190px;border-radius:17px;background:#28344a center/cover no-repeat;display:flex;align-items:end;overflow:hidden;margin-bottom:16px}
+.hero div{width:100%;padding:20px;color:white;background:linear-gradient(transparent,#000b)}
+.hero h2{margin:0 0 8px}
+.card{background:white;padding:20px;border-radius:16px;box-shadow:0 4px 18px #0001}
+label{display:block;margin:16px 0 7px;font-weight:bold;font-size:13px}
+input,select,textarea{width:100%;padding:13px;border:1px solid #dce1e8;border-radius:10px;font:14px Tahoma}
+textarea{min-height:100px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.section{border-bottom:1px solid #ddd;padding-bottom:10px;margin-top:24px;font-size:16px}
+.fields{display:none}
+.fields.active{display:block}
+#priceWords{color:#16834a;font-weight:bold;margin-top:9px}
+button{width:100%;padding:15px;margin-top:22px;background:#d6aa38;border:0;border-radius:10px;font:bold 16px Tahoma}
+.note{font-size:12px;color:#777;line-height:2}
+.market{background:#f3f5f8;padding:12px;border-radius:10px;font-size:12px;line-height:2;margin-top:12px}
+.back{display:block;text-align:center;margin:20px;color:#14243d;text-decoration:none}
+.gold-theme .card{background:#fffaf0;border:1px solid #ead8a5}
+.iron-theme .card{background:#f4f6f8}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.hero{height:170px}}
 </style>
 </head>
-
 <body>
 
 <header>
-  <h1>بازاریکو</h1>
-  <p>یک بازار، همه معاملات</p>
+<h1>بازاریکو</h1>
+<p>یک بازار، همه معاملات</p>
 </header>
 
-<div class="container">
-<div class="card">
+<div class="container" id="page">
 
+<div class="hero" id="hero">
+<div>
+<h2 id="heroTitle">بازاریکو</h2>
+<p id="heroText">دسته‌بندی موردنظر را انتخاب کن.</p>
+</div>
+</div>
+
+<div class="card">
 <h2>ثبت آگهی جدید</h2>
 
 <form id="adForm">
 
 <label>دسته‌بندی آگهی</label>
 <select id="category" required>
-  <option value="">انتخاب کنید</option>
-  <option>طلا و فلزات گران‌بها</option>
-  <option>خودرو</option>
-  <option>ملک و زمین</option>
-  <option>اجاره ویلا</option>
-  <option>خرید و فروش کسب‌وکار</option>
-  <option>کارخانه</option>
-  <option>آهن و فلزات صنعتی</option>
+<option value="">انتخاب کنید</option>
+<option>طلا و جواهر</option>
+<option>خودرو</option>
+<option>ملک و زمین</option>
+<option>اجاره ویلا</option>
+<option>کارخانه و کسب‌وکار</option>
+<option>آهن و فلزات</option>
 </select>
 
+<div id="goldFields" class="fields">
+<h3 class="section">مشخصات طلا و جواهر</h3>
+<div class="grid">
+<div><label>نوع طلا</label>
+<select id="goldType">
+<option value="">انتخاب کنید</option>
+<option>طلای زینتی</option>
+<option>طلای آب‌شده</option>
+<option>شمش</option>
+<option>سکه</option>
+<option>طلای دست‌دوم</option>
+</select></div>
+<div><label>عیار</label>
+<select id="goldKarat">
+<option value="">انتخاب کنید</option>
+<option>۱۸ عیار</option>
+<option>۲۴ عیار</option>
+<option>۲۱ عیار</option>
+</select></div>
+<div><label>وزن (گرم)</label>
+<input id="goldWeight" type="number" placeholder="مثلاً ۲۵">
+</div>
+<div><label>وضعیت</label>
+<select id="goldCondition">
+<option value="">انتخاب کنید</option>
+<option>نو</option>
+<option>کارکرده</option>
+</select></div>
+</div>
+</div>
+
+<div id="carFields" class="fields">
+<h3 class="section">مشخصات خودرو</h3>
+<div class="grid">
+<div><label>برند خودرو</label><input id="carBrand" placeholder="مثلاً ایران‌خودرو"></div>
+<div><label>مدل خودرو</label><input id="carModel" placeholder="مثلاً دنا پلاس"></div>
+<div><label>سال ساخت</label><input id="carYear" type="number" placeholder="مثلاً ۱۴۰۲"></div>
+<div><label>کارکرد (کیلومتر)</label><input id="carMileage" type="number" placeholder="مثلاً ۳۵۰۰۰"></div>
+<div><label>رنگ</label><input id="carColor"></div>
+<div><label>گیربکس</label>
+<select id="carGear"><option value="">انتخاب کنید</option><option>دنده‌ای</option><option>اتوماتیک</option></select></div>
+<div><label>نوع سوخت</label>
+<select id="carFuel"><option value="">انتخاب کنید</option><option>بنزینی</option><option>دوگانه‌سوز</option><option>هیبریدی</option><option>برقی</option><option>دیزلی</option></select></div>
+<div><label>وضعیت بدنه</label>
+<select id="carBody"><option value="">انتخاب کنید</option><option>بدون رنگ</option><option>یک لکه رنگ</option><option>چند لکه رنگ</option><option>رنگ‌شده</option><option>تصادفی</option></select></div>
+</div>
+
+<div class="market">
+<strong>پیشنهاد قیمت خودرو</strong><br>
+برای ارائه قیمت دقیق، باید اطلاعات روز معاملات و آگهی‌های مشابه به بازاریکو متصل شود. فعلاً قیمت تخمینی غیرواقعی نمایش نمی‌دهیم.
+</div>
+</div>
+
+<div id="ironFields" class="fields">
+<h3 class="section">مشخصات آهن و فلزات</h3>
+<div class="grid">
+<div><label>نوع محصول</label>
+<select id="ironType"><option value="">انتخاب کنید</option><option>تیرآهن</option><option>میلگرد</option><option>ورق</option><option>نبشی و ناودانی</option><option>قوطی و پروفیل</option><option>ضایعات فلزی</option></select></div>
+<div><label>کارخانه / برند</label><input id="ironBrand"></div>
+<div><label>سایز</label><input id="ironSize" placeholder="مثلاً سایز ۱۶"></div>
+<div><label>مقدار (تن)</label><input id="ironTons" type="number" placeholder="مثلاً ۲۰"></div>
+<div><label>محل بار</label><input id="ironLocation"></div>
+<div><label>وضعیت کالا</label>
+<select id="ironCondition"><option value="">انتخاب کنید</option><option>نو</option><option>کارکرده</option><option>ضایعات</option></select></div>
+</div>
+</div>
+
+<h3 class="section">اطلاعات آگهی</h3>
+
 <label>عنوان آگهی</label>
-<input id="title" type="text"
-placeholder="مثلاً فروش زمین ۱۰۰۰ متری"
-required>
+<input id="title" required placeholder="عنوان آگهی را بنویسید">
 
-<label>قیمت (تومان)</label>
-<input id="price" type="text"
-inputmode="numeric"
-placeholder="مثلاً ۲/۰۰۰/۰۰۰/۰۰۰"
-required>
-
+<label>قیمت کل (تومان)</label>
+<input id="price" type="text" inputmode="numeric" required placeholder="۲/۰۰۰/۰۰۰/۰۰۰">
 <div id="priceWords"></div>
 
-<label>شهر</label>
-<input id="city" type="text"
-placeholder="نام شهر"
-required>
+<div class="grid">
+<div><label>شهر</label><input id="city" required></div>
+<div><label>شماره تماس</label><input id="phone" required inputmode="tel"></div>
+</div>
 
-<label>شماره تماس</label>
-<input id="phone" type="tel"
-inputmode="tel"
-placeholder="شماره موبایل"
-required>
-
-<label>توضیحات آگهی</label>
-<textarea id="description"
-placeholder="مشخصات و توضیحات آگهی را بنویسید..."
-required></textarea>
+<label>توضیحات تکمیلی</label>
+<textarea id="description" required placeholder="تمام جزئیات معامله را بنویسید..."></textarea>
 
 <button type="submit">ثبت آگهی</button>
-
 </form>
 
-<p class="note">
-آگهی شما فعلاً به‌صورت پیش‌نویس در این دستگاه ذخیره می‌شود و هنوز عمومی منتشر نمی‌شود.
-</p>
-
+<p class="note">آگهی فعلاً به‌صورت پیش‌نویس در همین دستگاه ذخیره می‌شود و عمومی منتشر نمی‌شود.</p>
 </div>
 </div>
 
 <a class="back" href="index.html">بازگشت به صفحه اصلی</a>
 
 <script>
-const priceInput = document.getElementById("price");
-const priceWords = document.getElementById("priceWords");
+const category=document.getElementById("category");
+const page=document.getElementById("page");
+const hero=document.getElementById("hero");
 
-const digits = "۰۱۲۳۴۵۶۷۸۹";
+const themes={
+"طلا و جواهر":{
+title:"بازار طلا و جواهر",
+text:"خرید و فروش طلا با مشخصات دقیق",
+image:"https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=1200&q=85",
+theme:"gold-theme"
+},
+"خودرو":{
+title:"بازار خرید و فروش خودرو",
+text:"مشخصات کامل ماشین خود را ثبت کن",
+image:"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=85",
+theme:""
+},
+"آهن و فلزات":{
+title:"بازار آهن و فولاد",
+text:"تیرآهن، میلگرد و محصولات صنعتی",
+image:"https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=85",
+theme:"iron-theme"
+}
+};
 
-function toEnglishNumber(value){
-  return value
-    .replace(/[۰-۹]/g, d => digits.indexOf(d))
-    .replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+function showFields(){
+document.querySelectorAll(".fields").forEach(x=>x.classList.remove("active"));
+page.className="container";
+let c=category.value;
+if(c==="طلا و جواهر"){
+document.getElementById("goldFields").classList.add("active");
+}else if(c==="خودرو"){
+document.getElementById("carFields").classList.add("active");
+}else if(c==="آهن و فلزات"){
+document.getElementById("ironFields").classList.add("active");
+}
+let t=themes[c];
+if(t){
+page.classList.add(t.theme);
+document.getElementById("heroTitle").innerText=t.title;
+document.getElementById("heroText").innerText=t.text;
+hero.style.backgroundImage="url('"+t.image+"')";
+}else{
+document.getElementById("heroTitle").innerText="بازاریکو";
+document.getElementById("heroText").innerText="مشخصات آگهی خود را وارد کن.";
+hero.style.backgroundImage="none";
+}
+}
+category.addEventListener("change",showFields);
+
+const params=new URLSearchParams(location.search);
+if(params.get("category")){
+let wanted=params.get("category");
+if(wanted==="طلا و فلزات گران‌بها")wanted="طلا و جواهر";
+if(wanted==="آهن و فلزات صنعتی")wanted="آهن و فلزات";
+category.value=wanted;
+showFields();
 }
 
-function threeDigits(value){
-  return value.replace(/\B(?=(\d{3})+(?!\d))/g, "/");
+const price=document.getElementById("price");
+const words=document.getElementById("priceWords");
+const fa="۰۱۲۳۴۵۶۷۸۹";
+
+function english(v){
+return v.replace(/[۰-۹]/g,d=>fa.indexOf(d)).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d));
 }
 
-const ones = [
-"", "یک", "دو", "سه", "چهار", "پنج",
-"شش", "هفت", "هشت", "نه"
-];
+const ones=["","یک","دو","سه","چهار","پنج","شش","هفت","هشت","نه"];
+const teens=["ده","یازده","دوازده","سیزده","چهارده","پانزده","شانزده","هفده","هجده","نوزده"];
+const tens=["","","بیست","سی","چهل","پنجاه","شصت","هفتاد","هشتاد","نود"];
+const hundreds=["","صد","دویست","سیصد","چهارصد","پانصد","ششصد","هفتصد","هشتصد","نهصد"];
 
-const teens = [
-"ده", "یازده", "دوازده", "سیزده", "چهارده",
-"پانزده", "شانزده", "هفده", "هجده", "نوزده"
-];
-
-const tens = [
-"", "", "بیست", "سی", "چهل", "پنجاه",
-"شصت", "هفتاد", "هشتاد", "نود"
-];
-
-const hundreds = [
-"", "صد", "دویست", "سیصد", "چهارصد",
-"پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد"
-];
-
-function threeToWords(n){
-  if(n === 0) return "";
-
-  let parts = [];
-  let h = Math.floor(n / 100);
-  let r = n % 100;
-
-  if(h) parts.push(hundreds[h]);
-
-  if(r >= 10 && r < 20){
-    parts.push(teens[r - 10]);
-  } else {
-    let t = Math.floor(r / 10);
-    let o = r % 10;
-    if(t) parts.push(tens[t]);
-    if(o) parts.push(ones[o]);
-  }
-
-  return parts.join(" و ");
+function groupWords(n){
+let p=[],h=Math.floor(n/100),r=n%100;
+if(h)p.push(hundreds[h]);
+if(r>=10&&r<20)p.push(teens[r-10]);
+else{
+let t=Math.floor(r/10),o=r%10;
+if(t)p.push(tens[t]);
+if(o)p.push(ones[o]);
+}
+return p.join(" و ");
 }
 
-function numberToWords(n){
-  if(n === 0) return "صفر";
-
-  const scales = [
-    "",
-    "هزار",
-    "میلیون",
-    "میلیارد",
-    "تریلیون"
-  ];
-
-  let parts = [];
-  let i = 0;
-
-  while(n > 0){
-    let chunk = n % 1000;
-
-    if(chunk){
-      let text = threeToWords(chunk);
-      if(scales[i]) text += " " + scales[i];
-      parts.unshift(text);
-    }
-
-    n = Math.floor(n / 1000);
-    i++;
-  }
-
-  return parts.join(" و ");
+function numberWords(n){
+if(n===0)return"صفر";
+let scales=["","هزار","میلیون","میلیارد","تریلیون"];
+let parts=[],i=0;
+while(n>0){
+let c=n%1000;
+if(c){
+let w=groupWords(c);
+if(scales[i])w+=" "+scales[i];
+parts.unshift(w);
+}
+n=Math.floor(n/1000);
+i++;
+}
+return parts.join(" و ");
 }
 
-priceInput.addEventListener("input", function(){
-  let raw = toEnglishNumber(this.value);
-  raw = raw.replace(/\D/g, "");
-
-  if(!raw){
-    this.value = "";
-    priceWords.innerText = "";
-    return;
-  }
-
-  this.value = threeDigits(raw);
-
-  let number = Number(raw);
-
-  if(Number.isSafeInteger(number)){
-    priceWords.innerText =
-      numberToWords(number) + " تومان";
-  } else {
-    priceWords.innerText = "مبلغ واردشده بسیار بزرگ است";
-  }
+price.addEventListener("input",function(){
+let raw=english(this.value).replace(/\D/g,"");
+if(!raw){this.value="";words.innerText="";return;}
+this.value=raw.replace(/\B(?=(\d{3})+(?!\d))/g,"/");
+let n=Number(raw);
+words.innerText=Number.isSafeInteger(n)?numberWords(n)+" تومان":"مبلغ بسیار بزرگ است";
 });
 
-document.getElementById("adForm")
-.addEventListener("submit", function(e){
+document.getElementById("adForm").addEventListener("submit",function(e){
+e.preventDefault();
+let raw=english(price.value).replace(/\D/g,"");
+let details={};
+[
+"goldType","goldKarat","goldWeight","goldCondition",
+"carBrand","carModel","carYear","carMileage","carColor","carGear","carFuel","carBody",
+"ironType","ironBrand","ironSize","ironTons","ironLocation","ironCondition"
+].forEach(id=>{
+let el=document.getElementById(id);
+if(el&&el.value)details[id]=el.value;
+});
 
-  e.preventDefault();
+let ad={
+category:category.value,
+title:document.getElementById("title").value,
+price:raw,
+city:document.getElementById("city").value,
+phone:document.getElementById("phone").value,
+description:document.getElementById("description").value,
+details:details,
+date:new Date().toISOString()
+};
 
-  const rawPrice = toEnglishNumber(priceInput.value)
-    .replace(/\D/g, "");
-
-  const ad = {
-    category: document.getElementById("category").value,
-    title: document.getElementById("title").value,
-    price: rawPrice,
-    city: document.getElementById("city").value,
-    phone: document.getElementById("phone").value,
-    description: document.getElementById("description").value,
-    date: new Date().toISOString()
-  };
-
-  let ads = JSON.parse(
-    localStorage.getItem("bazariko_ads") || "[]"
-  );
-
-  ads.push(ad);
-
-  localStorage.setItem("bazariko_ads", JSON.stringify(ads));
-
-  alert("آگهی شما به‌صورت پیش‌نویس ذخیره شد.");
-
-  this.reset();
-  priceWords.innerText = "";
+let ads=JSON.parse(localStorage.getItem("bazariko_ads")||"[]");
+ads.push(ad);
+localStorage.setItem("bazariko_ads",JSON.stringify(ads));
+alert("آگهی به‌صورت پیش‌نویس ذخیره شد.");
+this.reset();
+words.innerText="";
+showFields();
 });
 </script>
-
 </body>
 </html>
