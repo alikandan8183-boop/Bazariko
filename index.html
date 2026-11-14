@@ -4,37 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>بازاریکو | یک بازار، همه معاملات</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:tahoma,Arial;background:#f5f6fa;color:#17213b}
-header{background:linear-gradient(135deg,#101a35,#26395f);color:white;padding:22px 18px 35px;border-bottom:5px solid #d4af37;border-radius:0 0 25px 25px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.logo{font-size:27px;font-weight:bold}
+header{background:linear-gradient(135deg,#101a35,#26395f);color:white;padding:22px 16px 30px;border-bottom:5px solid #d4af37;border-radius:0 0 22px 22px}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.logo{font-size:26px;font-weight:bold}
 .tag{font-size:12px;color:#e7d28b}
-.hero{padding:28px 5px 15px}
-.hero h1{font-size:24px;line-height:1.8;margin:0}
-.hero p{font-size:13px;color:#e0e4ed;line-height:2}
-.search{width:100%;padding:15px;border:0;border-radius:12px;font:14px Tahoma;margin-top:12px}
-.btn{display:inline-block;background:#d4af37;color:#17213b;padding:13px 20px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:14px}
-main{max-width:850px;margin:auto}
-h2{font-size:18px;margin:25px 16px 13px}
-.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;padding:0 15px}
-.card{background:white;border:1px solid #e5e7ed;border-radius:14px;padding:14px 9px;text-align:center;text-decoration:none;color:#17213b;box-shadow:0 4px 12px #101a3509;transition:.2s}
-.card:active{transform:scale(.97)}
-.icon{font-size:27px}
-.card h3{font-size:13px;margin:8px 0}
-.card p{font-size:10px;color:#747b8d;margin:0}
-.banner{margin:25px 15px;padding:23px 16px;background:linear-gradient(120deg,#f8f0d8,#fffaf0);border:1px solid #e8d9a9;border-radius:17px;text-align:center}
-.banner h3{margin:0 0 10px}
-.banner p{font-size:12px;color:#656b78;line-height:2}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 15px}
-.step{background:white;border-radius:12px;padding:14px 7px;text-align:center;font-size:11px;line-height:2}
-.step b{display:block;font-size:20px}
-.cta{text-align:center;margin:25px 15px;background:#101a35;color:white;padding:23px 12px;border-radius:16px}
-.cta p{font-size:12px;color:#e2e5ec;line-height:2}
-footer{margin-top:30px;background:#101a35;color:#ddd;text-align:center;padding:22px;font-size:12px}
-.hidden{display:none}
-@media(min-width:650px){.categories{grid-template-columns:repeat(3,1fr)}}
+.hero{padding:25px 0 12px}
+.hero h1{font-size:23px;line-height:1.8}
+.hero p{font-size:13px;line-height:2;color:#ddd}
+main{max-width:850px;margin:auto;padding:14px}
+button{border:0;background:#d4af37;color:#17213b;padding:13px 18px;border-radius:9px;font-weight:bold;font-family:tahoma;cursor:pointer;margin:4px}
+input,textarea,select{width:100%;padding:13px;margin:7px 0;border:1px solid #ddd;border-radius:9px;font:14px Tahoma}
+h2{font-size:18px;margin:22px 4px 12px}
+.box{background:white;padding:16px;border-radius:14px;margin:14px 0;box-shadow:0 3px 12px #0000000b}
+.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.card{background:white;padding:17px 8px;border:1px solid #eee;border-radius:12px;text-align:center;cursor:pointer}
+.card b{display:block;margin-top:8px}
+.ad{background:white;padding:15px;border-radius:12px;margin:10px 0;border:1px solid #eee}
+.ad h3{margin:5px 0}
+.small{font-size:12px;color:#777;line-height:2}
+.hidden{display:none!important}
+#message{padding:12px;border-radius:8px;margin:10px 0;background:#fff3cd;font-size:13px;line-height:2}
+footer{text-align:center;background:#101a35;color:white;padding:22px;margin-top:30px}
 </style>
 </head>
 <body>
@@ -44,76 +38,213 @@ footer{margin-top:30px;background:#101a35;color:#ddd;text-align:center;padding:2
 <div class="logo">بازاریکو 🛒</div>
 <div class="tag">یک بازار، همه معاملات</div>
 </div>
-
 <div class="hero">
 <h1>بازار معاملات بزرگ ایران</h1>
 <p>از طلا و خودرو تا ملک، کارخانه و آهن؛ فرصت‌های خرید و فروش را یک‌جا پیدا کن.</p>
-<a class="btn" href="ad.html">＋ ثبت آگهی رایگان</a>
 </div>
-
-<input class="search" id="search" type="search" placeholder="جست‌وجو در بازاریکو...">
+<button onclick="openBox('auth')">ورود / ثبت‌نام</button>
+<button onclick="openBox('form')">＋ ثبت آگهی</button>
 </header>
 
 <main>
-<h2>دسته‌بندی بازار</h2>
 
-<div class="categories" id="categories">
-<a class="card" href="ad.html?category=خودرو">
-<div class="icon">🚗</div><h3>خودرو</h3><p>خرید و فروش خودرو</p>
-</a>
+<div id="message" class="hidden"></div>
 
-<a class="card" href="ad.html?category=ملک و زمین">
-<div class="icon">🏡</div><h3>ملک و زمین</h3><p>خرید، فروش و سرمایه‌گذاری</p>
-</a>
-
-<a class="card" href="ad.html?category=طلا و جواهر">
-<div class="icon">🥇</div><h3>طلا و جواهر</h3><p>معاملات طلا و فلزات گران‌بها</p>
-</a>
-
-<a class="card" href="ad.html?category=کارخانه و کسب‌وکار">
-<div class="icon">🏭</div><h3>کارخانه و کسب‌وکار</h3><p>خرید و فروش مجموعه‌ها</p>
-</a>
-
-<a class="card" href="ad.html?category=آهن و فلزات">
-<div class="icon">🔩</div><h3>آهن و فلزات</h3><p>معاملات صنعتی</p>
-</a>
-
-<a class="card" href="ad.html?category=اجاره ویلا">
-<div class="icon">🏖️</div><h3>اجاره ویلا</h3><p>اجاره و رزرو ویلا</p>
-</a>
-</div>
-
-<section class="banner">
-<h3>معامله بزرگ، شروعی ساده</h3>
-<p>آگهی خود را ثبت کن و فرصت معامله را در بازاریکو ایجاد کن.</p>
-<a class="btn" href="ad.html">شروع ثبت آگهی</a>
+<section id="auth" class="box hidden">
+<h2>ورود و ثبت‌نام</h2>
+<input id="email" type="email" placeholder="ایمیل">
+<input id="password" type="password" placeholder="رمز عبور">
+<button onclick="signup()">ثبت‌نام</button>
+<button onclick="login()">ورود</button>
+<button onclick="logout()">خروج از حساب</button>
+<p id="userInfo" class="small"></p>
 </section>
 
-<h2>چطور کار می‌کند؟</h2>
-<div class="steps">
-<div class="step"><b>۱</b>انتخاب دسته‌بندی</div>
-<div class="step"><b>۲</b>ثبت مشخصات آگهی</div>
-<div class="step"><b>۳</b>ارتباط با خریدار</div>
+<section id="form" class="box hidden">
+<h2>ثبت آگهی جدید</h2>
+<select id="category">
+<option value="">انتخاب دسته‌بندی</option>
+<option>خودرو</option>
+<option>ملک و زمین</option>
+<option>طلا و جواهر</option>
+<option>کارخانه و کسب‌وکار</option>
+<option>آهن و فلزات</option>
+<option>اجاره ویلا</option>
+</select>
+<input id="title" placeholder="عنوان آگهی">
+<input id="price" type="number" placeholder="قیمت به تومان">
+<input id="city" placeholder="شهر">
+<input id="phone" type="tel" placeholder="شماره تماس">
+<textarea id="description" rows="4" placeholder="توضیحات آگهی"></textarea>
+<button onclick="submitAd()">ثبت آگهی</button>
+</section>
+
+<h2>دسته‌بندی بازار</h2>
+<div class="categories">
+<div class="card" onclick="filterAds('خودرو')">🚗<b>خودرو</b></div>
+<div class="card" onclick="filterAds('ملک و زمین')">🏡<b>ملک و زمین</b></div>
+<div class="card" onclick="filterAds('طلا و جواهر')">🥇<b>طلا و جواهر</b></div>
+<div class="card" onclick="filterAds('کارخانه و کسب‌وکار')">🏭<b>کارخانه و کسب‌وکار</b></div>
+<div class="card" onclick="filterAds('آهن و فلزات')">🔩<b>آهن و فلزات</b></div>
+<div class="card" onclick="filterAds('اجاره ویلا')">🏖️<b>اجاره ویلا</b></div>
 </div>
 
-<div class="cta">
-<h3>آماده شروع معامله‌ای؟</h3>
-<p>آگهی خودت را در بازاریکو آماده کن.</p>
-<a class="btn" href="ad.html">ثبت آگهی</a>
-</div>
+<h2>آگهی‌های بازاریکو</h2>
+<input id="search" placeholder="جست‌وجو در آگهی‌ها..." oninput="loadAds()">
+<button onclick="filterAds('')">نمایش همه آگهی‌ها</button>
+<div id="ads">در حال دریافت آگهی‌ها...</div>
+
 </main>
 
 <footer>بازاریکو | یک بازار، همه معاملات</footer>
 
 <script>
-const search=document.getElementById("search");
-const cards=document.querySelectorAll(".card");
-search.addEventListener("input",()=>{
-const value=search.value.trim().toLowerCase();
-cards.forEach(card=>{
-card.classList.toggle("hidden",!card.innerText.toLowerCase().includes(value));
-});
-});
+const SUPABASE_URL="https://qwcotdofymydhkndnhjf.supabase.co";
+
+const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3Y290ZG9meW15ZGhrbmRuaGpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ1NjcwMDYsImV4cCI6MjExMDE0MzAwNn0.61XoS-BlARSDDRvpV3I7_ZDBms9nxtBtwJc1RYQcXjo";
+
+const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+let selectedCategory="";
+
+function openBox(id){
+ document.getElementById(id).classList.toggle("hidden");
+}
+
+function message(text){
+ const el=document.getElementById("message");
+ el.textContent=text;
+ el.classList.remove("hidden");
+}
+
+async function signup(){
+ const email=document.getElementById("email").value.trim();
+ const password=document.getElementById("password").value;
+
+ if(!email||password.length<6){
+  message("ایمیل و رمز حداقل ۶ حرفی وارد کن.");
+  return;
+ }
+
+ const {error}=await db.auth.signUp({email,password});
+
+ if(error) message("خطا: "+error.message);
+ else message("ثبت‌نام انجام شد. ایمیلت را برای تأیید بررسی کن.");
+}
+
+async function login(){
+ const email=document.getElementById("email").value.trim();
+ const password=document.getElementById("password").value;
+
+ const {error}=await db.auth.signInWithPassword({email,password});
+
+ if(error) message("خطا: "+error.message);
+ else{
+  message("با موفقیت وارد شدی.");
+  updateUser();
+ }
+}
+
+async function logout(){
+ const {error}=await db.auth.signOut();
+ message(error?"خطا: "+error.message:"از حساب خارج شدی.");
+ updateUser();
+}
+
+async function updateUser(){
+ const {data}=await db.auth.getUser();
+ document.getElementById("userInfo").textContent=
+ data.user?"حساب فعال: "+data.user.email:"وارد حساب نشده‌ای.";
+}
+
+async function submitAd(){
+ const {data:{user}}=await db.auth.getUser();
+
+ if(!user){
+  message("برای ثبت آگهی ابتدا وارد حساب شو.");
+  document.getElementById("auth").classList.remove("hidden");
+  return;
+ }
+
+ const ad={
+  category:document.getElementById("category").value,
+  title:document.getElementById("title").value.trim(),
+  price:Number(document.getElementById("price").value),
+  city:document.getElementById("city").value.trim(),
+  phone:document.getElementById("phone").value.trim(),
+  description:document.getElementById("description").value.trim()
+ };
+
+ if(!ad.category||!ad.title||!ad.price||!ad.city||!ad.phone){
+  message("لطفاً اطلاعات ضروری آگهی را کامل کن.");
+  return;
+ }
+
+ const {error}=await db.from("ade").insert(ad);
+
+ if(error){
+  message("خطا در ثبت آگهی: "+error.message);
+  return;
+ }
+
+ message("آگهی با موفقیت ثبت شد.");
+ document.getElementById("form").reset();
+ loadAds();
+}
+
+async function loadAds(){
+ let query=db.from("ade").select("*");
+
+ if(selectedCategory){
+  query=query.eq("category",selectedCategory);
+ }
+
+ const term=document.getElementById("search").value.trim();
+
+ if(term){
+  query=query.ilike("title","%"+term+"%");
+ }
+
+ const {data,error}=await query;
+ const box=document.getElementById("ads");
+
+ if(error){
+  box.textContent="خطا در دریافت آگهی‌ها: "+error.message;
+  return;
+ }
+
+ if(!data||data.length===0){
+  box.textContent="هنوز آگهی‌ای ثبت نشده است.";
+  return;
+ }
+
+ box.innerHTML=data.map(a=>`
+  <div class="ad">
+   <h3>${safe(a.title)}</h3>
+   <p class="small">دسته: ${safe(a.category)} | شهر: ${safe(a.city)}</p>
+   <b>قیمت: ${Number(a.price||0).toLocaleString("fa-IR")} تومان</b>
+   <p>${safe(a.description)}</p>
+   <p class="small">تماس: ${safe(a.phone)}</p>
+  </div>
+ `).join("");
+}
+
+function filterAds(category){
+ selectedCategory=category;
+ loadAds();
+ document.getElementById("ads").scrollIntoView({behavior:"smooth"});
+}
+
+function safe(value){
+ return String(value??"").replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+db.auth.onAuthStateChange(()=>updateUser());
+updateUser();
+loadAds();
 </script>
+
 </body>
 </html>
