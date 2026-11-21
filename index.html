@@ -71,6 +71,39 @@ body{background:#f1f3fb;color:#101d3b;padding-bottom:92px} .app-header{backgroun
  .add-nav span{width:36px;height:36px;font-size:27px;margin-top:-17px}
 }
 
+
+/* فرم مرحله‌ای ثبت آگهی */
+.ad-form-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
+.ad-form-head h2{margin:0;color:#10264c}
+.ad-step-count{font-size:11px;color:#78839a;white-space:nowrap}
+.ad-progress{height:5px;background:#e7ebf3;border-radius:8px;overflow:hidden;margin:12px 0 22px}
+.ad-progress span{display:block;height:100%;width:50%;background:#d4af37;border-radius:8px;transition:width .2s}
+.ad-field{padding:0 0 17px;margin:0 0 17px;border-bottom:1px solid #e6e9ef}
+.ad-field:last-child{border-bottom:0}
+.ad-field-title{display:flex;align-items:center;justify-content:space-between;margin:0 2px 13px;font-size:17px;font-weight:bold;color:#17213b}
+.ad-required{color:#d94848}
+.ad-info{font-size:18px;color:#8993a7}
+.ad-photo-picker{width:116px;height:116px;border:1.5px dashed #9aa5b7;border-radius:13px;background:#f8f9fc;color:#52617c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;margin:0;padding:10px}
+.ad-photo-picker strong{font-size:36px;line-height:1;color:#b28b2c}
+.ad-photo-picker span{font-size:12px}
+#adPhotos{display:none}
+.ad-photo-list{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.ad-photo-item{position:relative;width:76px;height:76px}
+.ad-photo-item img{width:100%;height:100%;object-fit:cover;border-radius:9px;border:1px solid #dce1eb}
+.ad-photo-remove{position:absolute;top:-7px;left:-6px;width:23px;height:23px;padding:0;margin:0;border-radius:50%;background:#b52d36;color:white;font-size:15px}
+.ad-title-input{height:58px;border:1.5px solid #aab2c1;border-radius:13px;background:#fff;font-size:16px;padding:0 15px}
+.ad-step-actions{display:flex;gap:10px;margin-top:22px}
+.ad-step-actions button{flex:1;min-height:52px;border-radius:12px;font-size:16px}
+.ad-next-btn{background:#d4af37;color:#17213b}
+.ad-back-btn{background:#e9edf5;color:#263858}
+.ad-step-note{font-size:11px;color:#7d8799;line-height:1.9;margin-top:8px}
+@media(max-width:600px){
+ #form.box{padding:15px 13px}
+ .ad-field-title{font-size:16px}
+ .ad-photo-picker{width:108px;height:108px}
+ .ad-title-input{height:54px;font-size:14px}
+ .ad-step-actions{position:sticky;bottom:78px;background:#fff;padding:8px 0;z-index:5}
+}
 </style>
 </head><body>
 <header class="app-header">
@@ -93,20 +126,40 @@ body{background:#f1f3fb;color:#101d3b;padding-bottom:92px} .app-header{backgroun
 <button id="verifyCodeBtn" onclick="verifyCode()">تأیید کد و ورود</button>
 <button onclick="logout()">خروج از حساب</button><p id="userInfo" class="small">در حال بررسی حساب...</p>
 </section><section id="form" class="box hidden">
-<h2>ثبت آگهی جدید</h2><select id="category">
-<option value="">انتخاب دسته‌بندی</option>
-<option>خودرو</option>
-<option>ملک و زمین</option>
-<option>طلا و جواهر</option>
-<option>کارخانه و کسب‌وکار</option>
-<option>آهن و فلزات</option>
-<option>اجاره ویلا</option>
-</select><input id="title" placeholder="عنوان آگهی">
-<input id="price" type="number" min="1" placeholder="قیمت به تومان">
-<input id="city" placeholder="شهر">
-<input id="phone" type="tel" placeholder="شماره تماس">
-<textarea id="description" rows="4" placeholder="توضیحات آگهی"></textarea><label class="small" for="adPhotos">عکس‌های آگهی (حداکثر ۵ عکس، هر عکس تا ۵ مگابایت)</label><input id="adPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple><button id="submitAdBtn" onclick="submitAd()">ثبت آگهی</button>
-
+ <div class="ad-form-head"><h2>ثبت آگهی جدید</h2><span class="ad-step-count" id="adStepCount">صفحه ۱ از ۲: تصاویر و عنوان</span></div>
+ <div class="ad-progress"><span id="adProgressBar"></span></div>
+ <div id="adStep1">
+  <div class="ad-field">
+   <div class="ad-field-title"><span>عکس آگهی <b class="ad-required">*</b></span><span class="ad-info">ⓘ</span></div>
+   <label class="ad-photo-picker" for="adPhotos"><strong>＋📷</strong><span>افزودن عکس</span></label>
+   <input id="adPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+   <div id="adPhotoPreview" class="ad-photo-list"></div>
+   <div class="ad-step-note">حداکثر ۵ عکس، هر عکس تا ۵ مگابایت. عکس واضح باعث بهتر دیده‌شدن آگهی می‌شود.</div>
+  </div>
+  <div class="ad-field">
+   <div class="ad-field-title"><span>عنوان آگهی <b class="ad-required">*</b></span><span class="ad-info">ⓘ</span></div>
+   <input id="title" class="ad-title-input" placeholder="عنوان آگهی خود را بنویسید" maxlength="90">
+  </div>
+  <div class="ad-step-actions"><button type="button" class="ad-next-btn" onclick="goAdStep(2)">بعدی</button></div>
+ </div>
+ <div id="adStep2" class="hidden">
+  <div class="ad-field">
+   <div class="ad-field-title">اطلاعات آگهی</div>
+   <select id="category">
+    <option value="">انتخاب دسته‌بندی</option>
+    <option>خودرو</option><option>ملک و زمین</option><option>طلا و جواهر</option>
+    <option>کارخانه و کسب‌وکار</option><option>آهن و فلزات</option><option>اجاره ویلا</option>
+   </select>
+   <input id="price" type="number" min="1" placeholder="قیمت به تومان">
+   <input id="city" placeholder="شهر">
+   <input id="phone" type="tel" placeholder="شماره تماس">
+   <textarea id="description" rows="4" placeholder="توضیحات آگهی"></textarea>
+  </div>
+  <div class="ad-step-actions">
+   <button type="button" class="ad-back-btn" onclick="goAdStep(1)">قبلی</button>
+   <button type="button" id="submitAdBtn" class="ad-next-btn" onclick="submitAd()">ثبت آگهی</button>
+  </div>
+ </div>
 </section><section class="search-wrap">
  <input id="search" placeholder="جست‌وجو در آگهی‌ها ..." oninput="loadAds()">
  <span class="search-icon">⌕</span>
@@ -253,6 +306,46 @@ async function updateUser(){
  :"وارد حساب نشده‌ای.";
 }
 
+// جابه‌جایی بین مرحله‌های ثبت آگهی
+function goAdStep(step){
+ if(step===2){
+  const title=document.getElementById("title").value.trim();
+  const files=Array.from(document.getElementById("adPhotos").files||[]);
+  if(!title){message("ابتدا عنوان آگهی را بنویس.");return;}
+  if(files.length===0){message("لطفاً حداقل یک عکس برای آگهی انتخاب کن.");return;}
+  if(files.length>5){message("حداکثر ۵ عکس می‌توانی انتخاب کنی.");return;}
+  for(const file of files){
+   if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){
+    message("فرمت عکس باید JPG، PNG یا WEBP و حجم هر عکس حداکثر ۵ مگابایت باشد.");return;
+   }
+  }
+ }
+ const first=step===1;
+ document.getElementById("adStep1").classList.toggle("hidden",!first);
+ document.getElementById("adStep2").classList.toggle("hidden",first);
+ document.getElementById("adStepCount").textContent=first?"صفحه ۱ از ۲: تصاویر و عنوان":"صفحه ۲ از ۲: اطلاعات آگهی";
+ document.getElementById("adProgressBar").style.width=first?"50%":"100%";
+ document.getElementById("form").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+// پیش‌نمایش عکس‌های انتخاب‌شده
+document.getElementById("adPhotos").addEventListener("change",function(){
+ const files=Array.from(this.files||[]);
+ const preview=document.getElementById("adPhotoPreview");
+ preview.innerHTML="";
+ if(files.length>5){message("حداکثر ۵ عکس می‌توانی انتخاب کنی.");this.value="";return;}
+ files.forEach((file,index)=>{
+  if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){
+   message("فرمت عکس باید JPG، PNG یا WEBP و حجم هر عکس حداکثر ۵ مگابایت باشد.");this.value="";preview.innerHTML="";return;
+  }
+  const url=URL.createObjectURL(file);
+  const item=document.createElement("div");
+  item.className="ad-photo-item";
+  const img=document.createElement("img");img.src=url;img.alt="پیش‌نمایش عکس آگهی";
+  item.appendChild(img);preview.appendChild(item);
+ });
+});
+
 // ثبت آگهی
 async function submitAd(){
  const btn=document.getElementById("submitAdBtn");
@@ -319,6 +412,8 @@ async function submitAd(){
   document.getElementById("phone").value="";
   document.getElementById("description").value="";
   document.getElementById("adPhotos").value="";
+  document.getElementById("adPhotoPreview").innerHTML="";
+  goAdStep(1);
 
   await loadAds();
 
