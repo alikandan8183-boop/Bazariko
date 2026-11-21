@@ -132,7 +132,7 @@ body{background:#f1f3fb;color:#101d3b;padding-bottom:92px} .app-header{backgroun
   <div class="ad-field">
    <div class="ad-field-title"><span>عکس آگهی <b class="ad-required">*</b></span><span class="ad-info">ⓘ</span></div>
    <label class="ad-photo-picker" for="adPhotos"><strong>＋📷</strong><span>افزودن عکس</span></label>
-   <input id="adPhotos" type="file" accept="image/*" multiple>
+   <input id="adPhotos" type="file" accept="image/*">
    <div id="adPhotoPreview" class="ad-photo-list"></div>
    <div class="ad-step-note">حداکثر ۵ عکس، هر عکس تا ۵ مگابایت. عکس واضح باعث بهتر دیده‌شدن آگهی می‌شود.</div>
   </div>
@@ -306,11 +306,13 @@ async function updateUser(){
  :"وارد حساب نشده‌ای.";
 }
 
+let selectedAdPhotos=[];
+
 // جابه‌جایی بین مرحله‌های ثبت آگهی
 function goAdStep(step){
  if(step===2){
   const title=document.getElementById("title").value.trim();
-  const files=Array.from(document.getElementById("adPhotos").files||[]);
+  const files=selectedAdPhotos.slice();
   if(!title){message("ابتدا عنوان آگهی را بنویس.");return;}
   if(files.length===0){message("لطفاً حداقل یک عکس برای آگهی انتخاب کن.");return;}
   if(files.length>5){message("حداکثر ۵ عکس می‌توانی انتخاب کنی.");return;}
@@ -330,20 +332,20 @@ function goAdStep(step){
 
 // پیش‌نمایش عکس‌های انتخاب‌شده
 document.getElementById("adPhotos").addEventListener("change",function(){
- const files=Array.from(this.files||[]);
+ const chosen=this.files&&this.files[0];
  const preview=document.getElementById("adPhotoPreview");
- preview.innerHTML="";
- if(files.length>5){message("حداکثر ۵ عکس می‌توانی انتخاب کنی.");this.value="";return;}
- files.forEach((file,index)=>{
+ if(!chosen){return;}
+ if(selectedAdPhotos.length>=5){message("حداکثر ۵ عکس می‌توانی انتخاب کنی.");this.value="";return;}
+ const file=chosen;
   if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){
-   message("فرمت عکس باید JPG، PNG یا WEBP و حجم هر عکس حداکثر ۵ مگابایت باشد.");this.value="";preview.innerHTML="";return;
+   message("فرمت عکس باید JPG، PNG یا WEBP و حجم هر عکس حداکثر ۵ مگابایت باشد.");this.value="";return;
   }
-  const url=URL.createObjectURL(file);
+  selectedAdPhotos.push(file);
   const item=document.createElement("div");
   item.className="ad-photo-item";
-  const img=document.createElement("img");img.src=url;img.alt="پیش‌نمایش عکس آگهی";
+  const img=document.createElement("img");img.src=URL.createObjectURL(file);img.alt="پیش‌نمایش عکس آگهی";
   item.appendChild(img);preview.appendChild(item);
- });
+  this.value="";
 });
 
 // ثبت آگهی
@@ -360,7 +362,7 @@ async function submitAd(){
 
  const price=Number(document.getElementById("price").value);
 
- const files=Array.from(document.getElementById("adPhotos").files||[]);
+ const files=selectedAdPhotos.slice();
  if(files.length>5){message("حداکثر ۵ عکس می‌توانی انتخاب کنی.");return;}
  for(const file of files){
   if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){message("فرمت عکس باید JPG، PNG یا WEBP و حجم هر عکس حداکثر ۵ مگابایت باشد.");return;}
@@ -412,6 +414,7 @@ async function submitAd(){
   document.getElementById("phone").value="";
   document.getElementById("description").value="";
   document.getElementById("adPhotos").value="";
+  selectedAdPhotos=[];
   document.getElementById("adPhotoPreview").innerHTML="";
   goAdStep(1);
 
