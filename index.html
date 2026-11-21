@@ -1,557 +1,180 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101a35">
 <title>بازاریکو | یک بازار، همه معاملات</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
+:root{color-scheme:light;--navy:#101a35;--navy2:#26395f;--gold:#d4af37;--ink:#17213b;--muted:#687084;--line:#e5e8ef}
 *{box-sizing:border-box}
-body{margin:0;font-family:tahoma,Arial;background:#f5f6fa;color:#17213b}
-header{background:linear-gradient(135deg,#101a35,#26395f);color:white;padding:22px 16px 30px;border-bottom:5px solid #d4af37;border-radius:0 0 22px 22px}
-.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.logo{font-size:26px;font-weight:bold}
-.tag{font-size:12px;color:#e7d28b}
-.hero{padding:25px 0 12px}
-.hero h1{font-size:23px;line-height:1.8}
-.hero p{font-size:13px;line-height:2;color:#ddd}
-main{max-width:850px;margin:auto;padding:14px}
-button{border:0;background:#d4af37;color:#17213b;padding:13px 18px;border-radius:9px;font-weight:bold;font-family:tahoma;cursor:pointer;margin:4px}
-button:disabled{opacity:.5;cursor:wait}
-input,textarea,select{width:100%;padding:13px;margin:7px 0;border:1px solid #ddd;border-radius:9px;font:14px Tahoma}
-h2{font-size:18px;margin:22px 4px 12px}
-.box{background:white;padding:16px;border-radius:14px;margin:14px 0;box-shadow:0 3px 12px #0000000b}
-.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.card{background:white;padding:17px 8px;border:1px solid #eee;border-radius:12px;text-align:center;cursor:pointer}
-.card b{display:block;margin-top:8px}
-.ad{background:white;padding:15px;border-radius:12px;margin:10px 0;border:1px solid #eee;overflow-wrap:anywhere}.ad-photos{display:flex;gap:8px;overflow-x:auto;margin:10px 0}.ad-photos img{width:150px;height:115px;object-fit:cover;border-radius:9px;flex-shrink:0}
-.ad h3{margin:5px 0}
-.small{font-size:12px;color:#777;line-height:2}
-.hidden{display:none!important}
-#message{padding:12px;border-radius:8px;margin:10px 0;background:#fff3cd;font-size:13px;line-height:2;overflow-wrap:anywhere}
-.prices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
-.price-card{background:#fff;color:#17213b;border-radius:12px;padding:14px;text-align:center}
-.price-card b{display:block;font-size:18px;margin:10px 0;color:#98751b}
-.price-card span{font-size:12px;color:#777}
-footer{text-align:center;background:#101a35;color:white;padding:22px;margin-top:30px}
-.source{color:#e7d28b;text-decoration:underline}
-
-/* طراحی تازه صفحه اصلی بازاریکو */
-body{background:#f1f3fb;color:#101d3b;padding-bottom:92px} .app-header{background:linear-gradient(145deg,#061a3d,#102e5d 75%,#183c70);color:#fff;padding:20px 16px 17px;border-bottom:4px solid #d9aa32;border-radius:0 0 24px 24px;box-shadow:0 8px 24px #10234a30}.app-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.icon-btn{width:48px;height:48px;border:1px solid #ffffff55;border-radius:14px;background:#ffffff12;color:white;font-size:24px;margin:0;padding:4px}.brand{text-align:center}.brand-name{font-size:30px;font-weight:900;color:#f5bd3f;letter-spacing:-1px}.brand-name span{color:#fff;font-size:20px}.brand-tag{font-size:12px;color:#fff;margin-top:3px}.market-prices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}.market-price{display:flex;align-items:center;gap:10px;min-width:0;padding:13px 10px;border-radius:17px;color:#14213d;box-shadow:0 4px 12px #0002}.gold-price{background:linear-gradient(135deg,#fff1c9,#f6d77f);border:1px solid #ffdf8a}.dollar-price{background:linear-gradient(135deg,#fff,#dce8ff);border:1px solid #c5d8ff}.price-symbol{font-size:30px;color:#b18419;font-weight:bold}.market-price span,.market-price small{display:block;font-size:11px}.market-price b{display:block;font-size:16px;margin:6px 0;overflow-wrap:anywhere}.market-price small{color:#65718a}.price-updated,.price-source{text-align:center;font-size:10px;color:#dbe4f7;margin:10px 0 0}.price-source{margin-top:4px}.source{color:#ffdb83}.main,main{max-width:850px;margin:auto;padding:16px}.search-wrap{position:relative;margin:16px 0 22px}.search-wrap input{height:58px;border:1px solid #d7ddef;border-radius:30px;background:#fff;padding:0 20px 0 55px;font-size:15px;box-shadow:0 4px 13px #172c5810}.search-icon{position:absolute;left:20px;top:4px;font-size:35px;color:#75809a}.section-title{display:flex;justify-content:space-between;align-items:center;margin:8px 3px 12px}.section-title h2{margin:0;font-size:18px;color:#12264b}.section-title span{font-size:10px;color:#8b93a6}.visual-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.category-tile{height:158px;border-radius:19px;overflow:hidden;position:relative;background:#0b2449;box-shadow:0 5px 13px #13264a20;cursor:pointer}.category-tile img{width:100%;height:112px;object-fit:cover;display:block}.category-tile b{height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:#09234a;color:white;font-size:14px}.category-tile i{font-style:normal;font-size:26px;color:#f6c34e}.ads-title{margin-top:27px}.all-ads{background:#e8edf8;color:#17315b;border:1px solid #d6dfef;margin:0 0 8px}.ad{border-radius:16px;box-shadow:0 4px 14px #14284c10}.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#071d40;border-top:2px solid #d9aa32;padding:7px 5px calc(7px + env(safe-area-inset-bottom));box-shadow:0 -5px 18px #071d4030}.nav-item{background:transparent;color:#fff;border-radius:0;margin:0;padding:4px 2px;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px}.nav-item span{font-size:25px;line-height:1.1}.nav-item.active{color:#f4bd3d}.add-nav span{width:44px;height:44px;border-radius:50%;background:#efb532;color:#fff;font-size:34px;display:flex;align-items:center;justify-content:center;margin-top:-22px;box-shadow:0 2px 8px #0003}.add-nav{color:#ffcf59}#auth,#form{scroll-margin-top:15px;border:1px solid #e1e6f0;box-shadow:0 6px 20px #11264a12}#form h2,#auth h2{color:#10264c}#message{position:relative;z-index:30}@media(min-width:700px){.visual-categories{grid-template-columns:repeat(3,minmax(0,1fr))}.category-tile{height:175px}.category-tile img{height:129px}.market-prices{max-width:680px;margin:22px auto 0}.app-header{padding-left:max(20px,calc((100% - 850px)/2));padding-right:max(20px,calc((100% - 850px)/2))}}
-
-/* چیدمان فشرده موبایل: نمایش همه دسته‌ها در یک صفحه */
-@media(max-width:600px){
- .app-header{padding:9px 12px 10px;border-radius:0 0 15px 15px;border-bottom-width:3px}
- .app-top{gap:6px}
- .icon-btn{width:34px;height:34px;border-radius:10px;font-size:18px}
- .brand-name{font-size:23px}
- .brand-name span{font-size:15px}
- .brand-tag{font-size:10px;margin-top:1px}
- .market-prices{gap:7px;margin-top:9px}
- .market-price{padding:6px 8px;border-radius:10px;gap:6px}
- .price-symbol{font-size:21px}
- .market-price span,.market-price small{font-size:9px}
- .market-price b{font-size:13px;margin:2px 0}
- .price-updated,.price-source{font-size:8px;margin-top:4px}
- .main,main{padding:7px 10px}
- .search-wrap{margin:7px 0 10px}
- .search-wrap input{height:39px;font-size:12px;padding:0 14px 0 42px}
- .search-icon{left:13px;top:0;font-size:28px}
- .section-title{margin:5px 2px 7px}
- .section-title h2{font-size:14px}
- .section-title span{font-size:9px}
- .visual-categories{gap:7px}
- .category-tile{height:83px;border-radius:11px}
- .category-tile img{height:55px}
- .category-tile b{height:28px;padding:0 8px;font-size:11px}
- .category-tile i{font-size:19px}
- .ads-title{margin-top:13px}
- .bottom-nav{padding:5px 4px calc(5px + env(safe-area-inset-bottom))}
- .nav-item{font-size:9px;gap:1px}
- .nav-item span{font-size:20px}
- .add-nav span{width:36px;height:36px;font-size:27px;margin-top:-17px}
-}
-
-
-/* فرم مرحله‌ای ثبت آگهی */
-.ad-form-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
-.ad-form-head h2{margin:0;color:#10264c}
-.ad-step-count{font-size:11px;color:#78839a;white-space:nowrap}
-.ad-progress{height:5px;background:#e7ebf3;border-radius:8px;overflow:hidden;margin:12px 0 22px}
-.ad-progress span{display:block;height:100%;width:50%;background:#d4af37;border-radius:8px;transition:width .2s}
-.ad-field{padding:0 0 17px;margin:0 0 17px;border-bottom:1px solid #e6e9ef}
-.ad-field:last-child{border-bottom:0}
-.ad-field-title{display:flex;align-items:center;justify-content:space-between;margin:0 2px 13px;font-size:17px;font-weight:bold;color:#17213b}
-.ad-required{color:#d94848}
-.ad-info{font-size:18px;color:#8993a7}
-.ad-photo-picker{width:116px;height:116px;border:1.5px dashed #9aa5b7;border-radius:13px;background:#f8f9fc;color:#52617c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;margin:0;padding:10px}
-.ad-photo-picker strong{font-size:36px;line-height:1;color:#b28b2c}
-.ad-photo-picker span{font-size:12px}
-#adPhotos{display:none}
-.ad-photo-list{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.ad-photo-item{position:relative;width:76px;height:76px}
-.ad-photo-item img{width:100%;height:100%;object-fit:cover;border-radius:9px;border:1px solid #dce1eb}
-.ad-photo-remove{position:absolute;top:-7px;left:-6px;width:23px;height:23px;padding:0;margin:0;border-radius:50%;background:#b52d36;color:white;font-size:15px}
-.ad-title-input{height:58px;border:1.5px solid #aab2c1;border-radius:13px;background:#fff;font-size:16px;padding:0 15px}
-.ad-step-actions{display:flex;gap:10px;margin-top:22px}
-.ad-step-actions button{flex:1;min-height:52px;border-radius:12px;font-size:16px}
-.ad-next-btn{background:#d4af37;color:#17213b}
-.ad-back-btn{background:#e9edf5;color:#263858}
-.ad-step-note{font-size:11px;color:#7d8799;line-height:1.9;margin-top:8px}
-@media(max-width:600px){
- #form.box{padding:15px 13px}
- .ad-field-title{font-size:16px}
- .ad-photo-picker{width:108px;height:108px}
- .ad-title-input{height:54px;font-size:14px}
- .ad-step-actions{position:sticky;bottom:78px;background:#fff;padding:8px 0;z-index:5}
-}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f5f6fa;color:var(--ink);line-height:1.7}
+header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:22px 15px 20px;border-bottom:4px solid var(--gold);border-radius:0 0 20px 20px}
+.wrap{max-width:900px;margin:auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{font-size:27px;font-weight:bold;color:#f1c75b}
+.tag{font-size:12px;color:#f7e8b4}
+.hero{padding:15px 0 3px}
+.hero h1{font-size:19px;margin:0 0 4px}
+.hero p{font-size:12px;color:#e3e8f1;margin:0}
+main{max-width:900px;margin:auto;padding:12px}
+.notice{background:#fff7dc;border:1px solid #ead38c;border-radius:12px;padding:11px 13px;color:#67521b;font-size:12px;line-height:1.9;margin:4px 0 14px}
+.search-wrap{margin:12px 0 18px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd2de;border-radius:10px;background:#fff;color:var(--ink);font:14px Tahoma,Arial,sans-serif}
+input:focus,select:focus,textarea:focus{outline:2px solid #d4af3770;border-color:var(--gold)}
+h2{font-size:18px;margin:18px 2px 10px;color:var(--navy)}
+.categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.category{background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:13px;padding:13px 8px;text-align:center;cursor:pointer;color:var(--ink);font:inherit}
+.category.active{background:#fff7df;border-color:var(--gold)}
+.category .emoji{display:block;font-size:27px}
+.category strong{display:block;font-size:13px;margin-top:4px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;margin:18px 0;box-shadow:0 3px 12px #14284c0b}
+.panel h2{margin:0 0 12px}
+form{display:grid;gap:9px}
+button{border:0;border-radius:10px;background:var(--gold);color:var(--navy);padding:12px 16px;font: bold 14px Tahoma;cursor:pointer}
+button:disabled{opacity:.55}
+.secondary{background:#e9edf5;color:var(--navy)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row button{flex:1}
+.ads{display:grid;gap:10px}
+.ad{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px;overflow-wrap:anywhere}
+.ad h3{margin:0 0 5px;font-size:16px}
+.meta{font-size:11px;color:var(--muted)}
+.ad p{margin:7px 0;white-space:pre-wrap}
+.price{font-weight:bold;color:#886713}
+.empty{background:#fff;border:1px dashed #cbd2df;border-radius:12px;text-align:center;padding:18px;color:var(--muted);font-size:13px}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:22px 10px}
+@media(min-width:620px){.categories{grid-template-columns:repeat(3,minmax(0,1fr))}form{grid-template-columns:1fr 1fr}form textarea,form button{grid-column:1/-1}.panel{padding:20px}}
 </style>
-</head><body>
-<header class="app-header">
- <div class="app-top">
-  <button class="icon-btn" aria-label="ورود" onclick="openBox('auth')">♙</button>
-  <div class="brand"><div class="brand-name">بازاریکو <span>◆</span></div><div class="brand-tag">یک بازار، همه معاملات</div></div>
-  <button class="icon-btn" aria-label="منو" onclick="openBox('auth')">☰</button>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <div class="top"><div class="logo">بازاریکو ◆</div><div class="tag">یک بازار، همه معاملات</div></div>
+  <div class="hero"><h1>بازار بزرگ ایران، در یک جا</h1><p>خرید و فروش خودرو، ملک، طلا و کالاهای صنعتی</p></div>
+  <div class="search-wrap"><input id="search" type="search" placeholder="جست‌وجو در آگهی‌ها..." aria-label="جست‌وجو در آگهی‌ها"></div>
  </div>
- <div class="market-prices">
-  <div class="market-price gold-price"><div class="price-symbol">▰</div><div><span>طلای ۱۸ عیار</span><b id="goldPrice">در حال دریافت...</b><small>تومان / هر گرم</small></div></div>
-  <div class="market-price dollar-price"><div class="price-symbol">＄</div><div><span>دلار آزاد</span><b id="usdPrice">در حال دریافت...</b><small>تومان</small></div></div>
+</header>
+<main>
+ <div class="notice"><strong>نسخه آزمایشی:</strong> آگهی‌ها فقط در حافظه همین مرورگر و همین گوشی ذخیره می‌شوند؛ عمومی نیستند و کاربران دیگر آن‌ها را نمی‌بینند. با پاک شدن اطلاعات مرورگر ممکن است آگهی‌ها از بین بروند.</div>
+ <h2>دسته‌بندی بازار</h2>
+ <div class="categories" id="categories">
+  <button type="button" class="category" data-category="خودرو"><span class="emoji">🚗</span><strong>خودرو</strong></button>
+  <button type="button" class="category" data-category="ملک و زمین"><span class="emoji">🏡</span><strong>ملک و زمین</strong></button>
+  <button type="button" class="category" data-category="طلا و جواهر"><span class="emoji">🥇</span><strong>طلا و جواهر</strong></button>
+  <button type="button" class="category" data-category="کارخانه و کسب‌وکار"><span class="emoji">🏭</span><strong>کارخانه و کسب‌وکار</strong></button>
+  <button type="button" class="category" data-category="آهن و فلزات"><span class="emoji">🔩</span><strong>آهن و فلزات</strong></button>
+  <button type="button" class="category" data-category="اجاره ویلا"><span class="emoji">🏖️</span><strong>اجاره ویلا</strong></button>
  </div>
- <p class="price-updated" id="priceUpdated">در حال دریافت قیمت‌های بازار...</p>
- <div class="price-source">منبع قیمت‌ها: <a class="source" href="https://nerkhara.com" target="_blank" rel="noopener">نرخ‌آرا</a></div>
-</header><main><main>
-<div id="message" class="hidden"></div><section id="auth" class="box hidden">
-<h2>ورود و ثبت‌نام با شماره موبایل</h2>
-<input id="phoneAuth" type="tel" placeholder="شماره موبایل، مثال: 09121234567">
-<button id="sendCodeBtn" onclick="sendCode()">ارسال کد تأیید</button><input id="otpCode" type="text" inputmode="numeric" placeholder="کد پیامکی دریافتی">
-<button id="verifyCodeBtn" onclick="verifyCode()">تأیید کد و ورود</button>
-<button onclick="logout()">خروج از حساب</button><p id="userInfo" class="small">در حال بررسی حساب...</p>
-</section><section id="form" class="box hidden">
- <div class="ad-form-head"><h2>ثبت آگهی جدید</h2><span class="ad-step-count" id="adStepCount">صفحه ۱ از ۲: تصاویر و عنوان</span></div>
- <div class="ad-progress"><span id="adProgressBar"></span></div>
- <div id="adStep1">
-  <div class="ad-field">
-   <div class="ad-field-title"><span>عکس آگهی <b class="ad-required">*</b></span><span class="ad-info">ⓘ</span></div>
-   <label class="ad-photo-picker" for="adPhotos"><strong>＋📷</strong><span>افزودن عکس</span></label>
-   <input id="adPhotos" type="file" accept="image/*">
-   <div id="adPhotoPreview" class="ad-photo-list"></div>
-   <div class="ad-step-note">حداکثر ۵ عکس، هر عکس تا ۵ مگابایت. عکس واضح باعث بهتر دیده‌شدن آگهی می‌شود.</div>
-  </div>
-  <div class="ad-field">
-   <div class="ad-field-title"><span>عنوان آگهی <b class="ad-required">*</b></span><span class="ad-info">ⓘ</span></div>
-   <input id="title" class="ad-title-input" placeholder="عنوان آگهی خود را بنویسید" maxlength="90">
-  </div>
-  <div class="ad-step-actions"><button type="button" class="ad-next-btn" onclick="goAdStep(2)">بعدی</button></div>
- </div>
- <div id="adStep2" class="hidden">
-  <div class="ad-field">
-   <div class="ad-field-title">اطلاعات آگهی</div>
-   <select id="category">
+ <section class="panel" id="form-panel">
+  <h2>ثبت آگهی جدید</h2>
+  <form id="adForm">
+   <input id="title" maxlength="90" required placeholder="عنوان آگهی">
+   <select id="category" required>
     <option value="">انتخاب دسته‌بندی</option>
     <option>خودرو</option><option>ملک و زمین</option><option>طلا و جواهر</option>
     <option>کارخانه و کسب‌وکار</option><option>آهن و فلزات</option><option>اجاره ویلا</option>
    </select>
-   <input id="price" type="number" min="1" placeholder="قیمت به تومان">
-   <input id="city" placeholder="شهر">
-   <input id="phone" type="tel" placeholder="شماره تماس">
-   <textarea id="description" rows="4" placeholder="توضیحات آگهی"></textarea>
-  </div>
-  <div class="ad-step-actions">
-   <button type="button" class="ad-back-btn" onclick="goAdStep(1)">قبلی</button>
-   <button type="button" id="submitAdBtn" class="ad-next-btn" onclick="submitAd()">ثبت آگهی</button>
-  </div>
- </div>
-</section><section class="search-wrap">
- <input id="search" placeholder="جست‌وجو در آگهی‌ها ..." oninput="loadAds()">
- <span class="search-icon">⌕</span>
-</section>
-<div class="section-title"><h2>دسته‌بندی بازار</h2><span>همه معاملات، یک‌جا</span></div>
-<div class="categories visual-categories">
- <div class="category-tile" onclick="filterAds('ملک و زمین')"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=85" alt="ملک و زمین"><b>ملک و زمین <i>‹</i></b></div>
- <div class="category-tile" onclick="filterAds('خودرو')"><img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=700&q=85" alt="خودرو"><b>خودرو <i>‹</i></b></div>
- <div class="category-tile" onclick="filterAds('کارخانه و کسب‌وکار')"><img src="https://images.unsplash.com/photo-1567789884554-0b844b597180?w=700&q=85" alt="کارخانه و کسب‌وکار"><b>کارخانه و کسب‌وکار <i>‹</i></b></div>
- <div class="category-tile" onclick="filterAds('طلا و جواهر')"><img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=700&q=85" alt="طلا و جواهر"><b>طلا و جواهر <i>‹</i></b></div>
- <div class="category-tile" onclick="filterAds('اجاره ویلا')"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=85" alt="اجاره ویلا"><b>اجاره ویلا <i>‹</i></b></div>
- <div class="category-tile" onclick="filterAds('آهن و فلزات')"><img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=700&q=85" alt="آهن و فلزات"><b>آهن و فلزات <i>‹</i></b></div>
-</div>
-<div class="section-title ads-title"><h2>آگهی‌های بازاریکو</h2><span>جدیدترین فرصت‌ها</span></div>
-<button class="all-ads" onclick="filterAds('')">نمایش همه آگهی‌ها</button>
-<div id="ads">در حال دریافت آگهی‌ها...</div>
+   <input id="price" inputmode="numeric" placeholder="قیمت به تومان (اختیاری)">
+   <input id="city" maxlength="50" placeholder="شهر (اختیاری)">
+   <input id="phone" type="tel" maxlength="20" placeholder="شماره تماس (اختیاری)">
+   <textarea id="description" rows="4" maxlength="1200" placeholder="توضیحات آگهی"></textarea>
+   <button id="submitBtn" type="submit">ثبت آگهی</button>
+  </form>
+ </section>
+ <div class="row"><h2 style="flex:1">آگهی‌های بازاریکو</h2><button type="button" class="secondary" id="allAds">نمایش همه</button></div>
+ <div class="ads" id="ads" aria-live="polite"></div>
 </main>
-<nav class="bottom-nav">
- <button class="nav-item active" onclick="filterAds('');window.scrollTo({top:0,behavior:'smooth'})"><span>⌂</span>بازاریکو</button>
- <button class="nav-item" onclick="document.getElementById('search').focus();window.scrollTo({top:0,behavior:'smooth'})"><span>⌕</span>جست‌وجو</button>
- <button class="nav-item" onclick="message('بخش نشان‌ها به‌زودی فعال می‌شود.')"><span>♧</span>نشان‌ها</button>
- <button class="nav-item add-nav" onclick="openBox('form');document.getElementById('form').scrollIntoView({behavior:'smooth'})"><span>＋</span>ثبت آگهی</button>
-</nav><footer>
-بازاریکو | یک بازار، همه معاملات
-</footer><script>
-const SUPABASE_URL="https://qwcotdofymydhkndnhjf.supabase.co";
-
-const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3Y290ZG9meW15ZGhrbmRuaGpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ1NjcwMDYsImV4cCI6MjExMDE0MzAwNn0.61XoS-BlARSDDRvpV3I7_ZDBms9nxtBtwJc1RYQcXjo";
-
-const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-
-let selectedCategory="";
-let loadingAds=false;
-
-function openBox(id){
- document.getElementById(id).classList.toggle("hidden");
-}
-
-function message(text){
- const el=document.getElementById("message");
- el.textContent=text;
- el.classList.remove("hidden");
- window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function normalizePhone(value){
- let phone=value.trim().replace(/[\s()-]/g,"");
-
- if(phone.startsWith("09")){
-  phone="+98"+phone.substring(1);
- }
-
- if(phone.startsWith("0098")){
-  phone="+98"+phone.substring(4);
- }
-
- return phone;
-}
-
-// ارسال کد پیامکی
-async function sendCode(){
- const btn=document.getElementById("sendCodeBtn");
- const phone=normalizePhone(document.getElementById("phoneAuth").value);
-
- if(!/^\+[1-9]\d{7,14}$/.test(phone)){
-  message("شماره موبایل معتبر نیست. مثال: 09121234567");
-  return;
- }
-
- document.getElementById("phoneAuth").value=phone;
- btn.disabled=true;
-
+<footer>بازاریکو | یک بازار، همه معاملات</footer>
+<script>
+(function(){
+ "use strict";
+ const STORAGE_KEY="bazariko_demo_ads_v1";
+ const categories=["خودرو","ملک و زمین","طلا و جواهر","کارخانه و کسب‌وکار","آهن و فلزات","اجاره ویلا"];
+ const $=id=>document.getElementById(id);
+ let ads=[];
+ let activeCategory="";
  try{
-  const {error}=await db.auth.signInWithOtp({
-   phone:phone,
-   options:{shouldCreateUser:true}
+  const saved=localStorage.getItem(STORAGE_KEY);
+  const parsed=saved?JSON.parse(saved):[];
+  ads=Array.isArray(parsed)?parsed.filter(x=>x&&typeof x==="object"):[];
+ }catch(error){ads=[];}
+ function save(){
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(ads));return true;}
+  catch(error){alert("ذخیره در این مرورگر ممکن نشد. فضای ذخیره‌سازی گوشی را بررسی کن.");return false;}
+ }
+ function cleanDigits(value){return String(value||"").replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[^0-9]/g,"");}
+ function render(){
+  const query=$("search").value.trim().toLocaleLowerCase("fa");
+  const shown=ads.filter(ad=>{
+   const matchesCategory=!activeCategory||ad.category===activeCategory;
+   const text=[ad.title,ad.category,ad.city,ad.description].join(" ").toLocaleLowerCase("fa");
+   return matchesCategory&&(!query||text.includes(query));
   });
-
-  if(error){
-   message("خطای ارسال پیامک: "+error.message);
-   return;
+  const box=$("ads");
+  box.replaceChildren();
+  if(!shown.length){
+   const empty=document.createElement("div");
+   empty.className="empty";
+   empty.textContent=ads.length?"آگهی مطابق جست‌وجو پیدا نشد.":"هنوز آگهی‌ای ثبت نشده است.";
+   box.append(empty);
+  }else{
+   shown.slice().reverse().forEach(ad=>{
+    const article=document.createElement("article");article.className="ad";
+    const title=document.createElement("h3");title.textContent=ad.title||"بدون عنوان";
+    const meta=document.createElement("div");meta.className="meta";
+    meta.textContent=[ad.category,ad.city].filter(Boolean).join(" • ");
+    const description=document.createElement("p");description.textContent=ad.description||"بدون توضیحات";
+    const price=document.createElement("p");price.className="price";
+    price.textContent=ad.price?Number(ad.price).toLocaleString("fa-IR")+" تومان":"قیمت توافقی";
+    article.append(title,meta,description,price);
+    if(ad.phone){
+     const phone=document.createElement("p");phone.className="meta";phone.textContent="شماره تماس: "+ad.phone;article.append(phone);
+    }
+    box.append(article);
+   });
   }
-
-  message("کد تأیید ارسال شد. پیامک را بررسی کن.");
-
- }catch(error){
-  message("خطا در ارتباط: "+error.message);
- }finally{
-  btn.disabled=false;
- }
-}
-
-// تأیید کد پیامکی
-async function verifyCode(){
- const btn=document.getElementById("verifyCodeBtn");
- const phone=normalizePhone(document.getElementById("phoneAuth").value);
- const token=document.getElementById("otpCode").value.trim();
-
- if(!/^\+[1-9]\d{7,14}$/.test(phone)||!token){
-  message("شماره موبایل و کد پیامکی معتبر را وارد کن.");
-  return;
- }
-
- btn.disabled=true;
-
- try{
-  const {data,error}=await db.auth.verifyOtp({
-   phone:phone,
-   token:token,
-   type:"sms"
+  document.querySelectorAll(".category").forEach(button=>{
+   button.classList.toggle("active",button.dataset.category===activeCategory);
   });
-
-  if(error){
-   message("کد تأیید نشد: "+error.message);
-   return;
-  }
-
-  message("با موفقیت وارد حساب شدی.");
-  document.getElementById("auth").classList.add("hidden");
-  updateUser();
-
- }catch(error){
-  message("خطا در ورود: "+error.message);
- }finally{
-  btn.disabled=false;
  }
-}
-
-// خروج از حساب
-async function logout(){
- const {error}=await db.auth.signOut();
- message(error?"خطا در خروج: "+error.message:"از حساب خارج شدی.");
- updateUser();
-}
-
-// وضعیت حساب کاربر
-async function updateUser(){
- const {data,error}=await db.auth.getUser();
-
- document.getElementById("userInfo").textContent=
- error?"وضعیت حساب قابل دریافت نیست.":
- data.user
- ?"حساب فعال: "+(data.user.phone||"کاربر بازاریکو")
- :"وارد حساب نشده‌ای.";
-}
-
-let selectedAdPhotos=[];
-
-// جابه‌جایی بین مرحله‌های ثبت آگهی
-function goAdStep(step){
- if(step===2){
-  const title=document.getElementById("title").value.trim();
-  const files=selectedAdPhotos.slice();
-  if(!title){message("ابتدا عنوان آگهی را بنویس.");return;}
-  if(files.length===0){message("لطفاً حداقل یک عکس برای آگهی انتخاب کن.");return;}
-  if(files.length>5){message("حداکثر ۵ عکس می‌توانی انتخاب کنی.");return;}
-  for(const file of files){
-   if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){
-    message("فرمت عکس باید JPG، PNG یا WEBP و حجم هر عکس حداکثر ۵ مگابایت باشد.");return;
-   }
-  }
- }
- const first=step===1;
- document.getElementById("adStep1").classList.toggle("hidden",!first);
- document.getElementById("adStep2").classList.toggle("hidden",first);
- document.getElementById("adStepCount").textContent=first?"صفحه ۱ از ۲: تصاویر و عنوان":"صفحه ۲ از ۲: اطلاعات آگهی";
- document.getElementById("adProgressBar").style.width=first?"50%":"100%";
- document.getElementById("form").scrollIntoView({behavior:"smooth",block:"start"});
-}
-
-// پیش‌نمایش عکس‌های انتخاب‌شده
-document.getElementById("adPhotos").addEventListener("change",function(){
- const chosen=this.files&&this.files[0];
- const preview=document.getElementById("adPhotoPreview");
- if(!chosen){return;}
- if(selectedAdPhotos.length>=5){message("حداکثر ۵ عکس می‌توانی انتخاب کنی.");this.value="";return;}
- const file=chosen;
-  if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){
-   message("فرمت عکس باید JPG، PNG یا WEBP و حجم هر عکس حداکثر ۵ مگابایت باشد.");this.value="";return;
-  }
-  selectedAdPhotos.push(file);
-  const item=document.createElement("div");
-  item.className="ad-photo-item";
-  const img=document.createElement("img");img.src=URL.createObjectURL(file);img.alt="پیش‌نمایش عکس آگهی";
-  item.appendChild(img);preview.appendChild(item);
-  this.value="";
-});
-
-// ثبت آگهی
-async function submitAd(){
- const btn=document.getElementById("submitAdBtn");
-
- const {data:{user},error:userError}=await db.auth.getUser();
-
- if(userError||!user){
-  message("برای ثبت آگهی ابتدا وارد حساب شو.");
-  document.getElementById("auth").classList.remove("hidden");
-  return;
- }
-
- const price=Number(document.getElementById("price").value);
-
- const files=selectedAdPhotos.slice();
- if(files.length>5){message("حداکثر ۵ عکس می‌توانی انتخاب کنی.");return;}
- for(const file of files){
-  if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){message("فرمت عکس باید JPG، PNG یا WEBP و حجم هر عکس حداکثر ۵ مگابایت باشد.");return;}
- }
-
- const ad={
-  user_id:user.id,
-  category:document.getElementById("category").value,
-  title:document.getElementById("title").value.trim(),
-  price:price,
-  city:document.getElementById("city").value.trim(),
-  phone:document.getElementById("phone").value.trim(),
-  description:document.getElementById("description").value.trim(),
-  details:{},
-  image_urls:[],
-  status:"published"
- };
-
- if(!ad.category||!ad.title||!ad.city||!ad.phone||!Number.isFinite(price)||price<=0){
-  message("دسته‌بندی، عنوان، قیمت معتبر، شهر و شماره تماس را کامل کن.");
-  return;
- }
-
- btn.disabled=true;
-
- try{
-  for(let i=0;i<files.length;i++){
-   const file=files[i];
-   const ext=file.name.split(".").pop().toLowerCase();
-   const path=user.id+"/"+Date.now()+"-"+i+"."+ext;
-   const {error:uploadError}=await db.storage.from("market-ad-photos").upload(path,file,{contentType:file.type,upsert:false});
-   if(uploadError)throw uploadError;
-   const {data:publicData}=db.storage.from("market-ad-photos").getPublicUrl(path);
-   ad.image_urls.push(publicData.publicUrl);
-  }
-  const {error}=await db.from("market_ads").insert(ad);
-
-  if(error){
-   message("خطا در ثبت آگهی: "+error.message);
-   return;
-  }
-
-  message("آگهی با موفقیت ثبت شد.");
-
-  document.getElementById("category").value="";
-  document.getElementById("title").value="";
-  document.getElementById("price").value="";
-  document.getElementById("city").value="";
-  document.getElementById("phone").value="";
-  document.getElementById("description").value="";
-  document.getElementById("adPhotos").value="";
-  selectedAdPhotos=[];
-  document.getElementById("adPhotoPreview").innerHTML="";
-  goAdStep(1);
-
-  await loadAds();
-
- }catch(error){
-  message("خطا در ارتباط با سرور: "+error.message);
- }finally{
-  btn.disabled=false;
- }
-}
-
-// دریافت آگهی‌ها از دیتابیس
-async function loadAds(){
- if(loadingAds)return;
- loadingAds=true;
-
- const box=document.getElementById("ads");
-
- try{
-  let query=db.from("market_ads")
-   .select("*")
-   .eq("status","published")
-   .order("created_at",{ascending:false})
-   .limit(100);
-
-  if(selectedCategory){
-   query=query.eq("category",selectedCategory);
-  }
-
-  const term=document.getElementById("search").value.trim();
-
-  if(term){
-   query=query.ilike("title","%"+term+"%");
-  }
-
-  const {data,error}=await query;
-
-  if(error){
-   box.textContent="خطا در دریافت آگهی‌ها: "+error.message;
-   return;
-  }
-
-  if(!data||data.length===0){
-   box.textContent="هنوز آگهی‌ای ثبت نشده است.";
-   return;
-  }
-
-  box.innerHTML=data.map(a=>`
-   <div class="ad">
-    <h3>${safe(a.title)}</h3>
-    <p class="small">دسته: ${safe(a.category)} | شهر: ${safe(a.city)}</p>
-    ${(Array.isArray(a.image_urls)&&a.image_urls.length)?`<div class="ad-photos">${a.image_urls.map(url=>`<img src="${safe(url)}" alt="عکس آگهی" loading="lazy">`).join("")}</div>`:""}
-    <b>قیمت: ${Number(a.price||0).toLocaleString("fa-IR")} تومان</b>
-    <p>${safe(a.description)}</p>
-    <p class="small">تماس: ${safe(a.phone)}</p>
-   </div>
-  `).join("");
-
- }catch(error){
-  box.textContent="خطا در ارتباط با سرور: "+error.message;
- }finally{
-  loadingAds=false;
- }
-}
-
-// فیلتر دسته‌بندی
-function filterAds(category){
- selectedCategory=category;
- loadAds();
- document.getElementById("ads").scrollIntoView({behavior:"smooth"});
-}
-
-// جلوگیری از اجرای کد مخرب در آگهی‌ها
-function safe(value){
- return String(value??"").replace(/[&<>"']/g,c=>({
-  "&":"&amp;",
-  "<":"&lt;",
-  ">":"&gt;",
-  '"':"&quot;",
-  "'":"&#39;"
- }[c]));
-}
-
-// دریافت قیمت دلار و طلا
-async function loadPrices(){
- const usdEl=document.getElementById("usdPrice");
- const goldEl=document.getElementById("goldPrice");
- const timeEl=document.getElementById("priceUpdated");
-
- try{
-  const response=await fetch("https://nerkhara.com/api/v1/latest.json");
-
-  if(!response.ok){
-   throw new Error("دریافت قیمت ناموفق بود");
-  }
-
-  const result=await response.json();
-
-  const items=result.items||[];
-  const usd=items.find(x=>x.id==="usd");
-  const gold=items.find(x=>x.id==="gold-18k");
-
-  if(!usd||!gold||!usd.price||!gold.price){
-   throw new Error("قیمت‌ها در دسترس نیستند");
-  }
-
-  if(usd.stale||gold.stale){
-   throw new Error("اطلاعات قیمت قدیمی است");
-  }
-
-  usdEl.textContent=Number(usd.price).toLocaleString("fa-IR");
-  goldEl.textContent=Number(gold.price).toLocaleString("fa-IR");
-
-  const updated=result.generated_utc
-   ?new Date(result.generated_utc)
-   :new Date();
-
-  timeEl.textContent="آخرین دریافت: "+updated.toLocaleString("fa-IR");
-
- }catch(error){
-  usdEl.textContent="نامشخص";
-  goldEl.textContent="نامشخص";
-  timeEl.textContent="فعلاً دریافت قیمت ممکن نیست؛ بعداً دوباره تلاش می‌کنیم.";
- }
-}
-
-// راه‌اندازی سایت
-db.auth.onAuthStateChange(()=>{
- setTimeout(updateUser,0);
-});
-
-updateUser();
-loadAds();
-loadPrices();
-
-setInterval(loadPrices,600000);
-setInterval(loadAds,60000);
-</script></body>
- </html>
+ $("adForm").addEventListener("submit",event=>{
+  event.preventDefault();
+  const title=$("title").value.trim();
+  const category=$("category").value;
+  const priceText=cleanDigits($("price").value);
+  const price=priceText?Number(priceText):"";
+  if(!title||!categories.includes(category)){alert("عنوان و دسته‌بندی آگهی را کامل کن.");return;}
+  if(priceText&&(!Number.isSafeInteger(price)||price<=0)){alert("قیمت واردشده معتبر نیست.");return;}
+  const item={
+   id:String(Date.now())+"-"+String(Math.random()).slice(2,8),
+   title:title,
+   category:category,
+   price:price,
+   city:$("city").value.trim(),
+   phone:$("phone").value.trim(),
+   description:$("description").value.trim(),
+   createdAt:new Date().toISOString()
+  };
+  ads.push(item);
+  if(save()){
+   event.target.reset();
+   activeCategory="";
+   render();
+   $("ads").scrollIntoView({behavior:"smooth",block:"start"});
+  }else{ads.pop();}
+ });
+ $("search").addEventListener("input",render);
+ document.querySelectorAll(".category").forEach(button=>{
+  button.addEventListener("click",()=>{
+   activeCategory=activeCategory===button.dataset.category?"":button.dataset.category;
+   render();
+   $("ads").scrollIntoView({behavior:"smooth",block:"start"});
+  });
+ });
+ $("allAds").addEventListener("click",()=>{activeCategory="";$("search").value="";render();});
+ render();
+})();
+</script>
+</body>
+</html>
