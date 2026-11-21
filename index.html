@@ -23,7 +23,7 @@ h2{font-size:18px;margin:22px 4px 12px}
 .categories{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .card{background:white;padding:17px 8px;border:1px solid #eee;border-radius:12px;text-align:center;cursor:pointer}
 .card b{display:block;margin-top:8px}
-.ad{background:white;padding:15px;border-radius:12px;margin:10px 0;border:1px solid #eee;overflow-wrap:anywhere}
+.ad{background:white;padding:15px;border-radius:12px;margin:10px 0;border:1px solid #eee;overflow-wrap:anywhere}.ad-photos{display:flex;gap:8px;overflow-x:auto;margin:10px 0}.ad-photos img{width:150px;height:115px;object-fit:cover;border-radius:9px;flex-shrink:0}
 .ad h3{margin:5px 0}
 .small{font-size:12px;color:#777;line-height:2}
 .hidden{display:none!important}
@@ -81,7 +81,7 @@ footer{text-align:center;background:#101a35;color:white;padding:22px;margin-top:
 <input id="price" type="number" min="1" placeholder="قیمت به تومان">
 <input id="city" placeholder="شهر">
 <input id="phone" type="tel" placeholder="شماره تماس">
-<textarea id="description" rows="4" placeholder="توضیحات آگهی"></textarea><button id="submitAdBtn" onclick="submitAd()">ثبت آگهی</button>
+<textarea id="description" rows="4" placeholder="توضیحات آگهی"></textarea><label class="small" for="adPhotos">عکس‌های آگهی (حداکثر ۵ عکس، هر عکس تا ۵ مگابایت)</label><input id="adPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple><button id="submitAdBtn" onclick="submitAd()">ثبت آگهی</button>
 
 </section><h2>دسته‌بندی بازار</h2>
 <div class="categories">
@@ -232,6 +232,12 @@ async function submitAd(){
 
  const price=Number(document.getElementById("price").value);
 
+ const files=Array.from(document.getElementById("adPhotos").files||[]);
+ if(files.length>5){message("حداکثر ۵ عکس می‌توانی انتخاب کنی.");return;}
+ for(const file of files){
+  if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){message("فرمت عکس باید JPG، PNG یا WEBP و حجم هر عکس حداکثر ۵ مگابایت باشد.");return;}
+ }
+
  const ad={
   user_id:user.id,
   category:document.getElementById("category").value,
@@ -241,6 +247,7 @@ async function submitAd(){
   phone:document.getElementById("phone").value.trim(),
   description:document.getElementById("description").value.trim(),
   details:{},
+  image_urls:[],
   status:"published"
  };
 
@@ -252,6 +259,15 @@ async function submitAd(){
  btn.disabled=true;
 
  try{
+  for(let i=0;i<files.length;i++){
+   const file=files[i];
+   const ext=file.name.split(".").pop().toLowerCase();
+   const path=user.id+"/"+Date.now()+"-"+i+"."+ext;
+   const {error:uploadError}=await db.storage.from("market-ad-photos").upload(path,file,{contentType:file.type,upsert:false});
+   if(uploadError)throw uploadError;
+   const {data:publicData}=db.storage.from("market-ad-photos").getPublicUrl(path);
+   ad.image_urls.push(publicData.publicUrl);
+  }
   const {error}=await db.from("market_ads").insert(ad);
 
   if(error){
@@ -267,6 +283,7 @@ async function submitAd(){
   document.getElementById("city").value="";
   document.getElementById("phone").value="";
   document.getElementById("description").value="";
+  document.getElementById("adPhotos").value="";
 
   await loadAds();
 
@@ -317,6 +334,7 @@ async function loadAds(){
    <div class="ad">
     <h3>${safe(a.title)}</h3>
     <p class="small">دسته: ${safe(a.category)} | شهر: ${safe(a.city)}</p>
+    ${(Array.isArray(a.image_urls)&&a.image_urls.length)?`<div class="ad-photos">${a.image_urls.map(url=>`<img src="${safe(url)}" alt="عکس آگهی" loading="lazy">`).join("")}</div>`:""}
     <b>قیمت: ${Number(a.price||0).toLocaleString("fa-IR")} تومان</b>
     <p>${safe(a.description)}</p>
     <p class="small">تماس: ${safe(a.phone)}</p>
