@@ -34,34 +34,24 @@ h2{font-size:18px;margin:22px 4px 12px}
 .price-card span{font-size:12px;color:#777}
 footer{text-align:center;background:#101a35;color:white;padding:22px;margin-top:30px}
 .source{color:#e7d28b;text-decoration:underline}
+
+/* طراحی تازه صفحه اصلی بازاریکو */
+body{background:#f1f3fb;color:#101d3b;padding-bottom:92px} .app-header{background:linear-gradient(145deg,#061a3d,#102e5d 75%,#183c70);color:#fff;padding:20px 16px 17px;border-bottom:4px solid #d9aa32;border-radius:0 0 24px 24px;box-shadow:0 8px 24px #10234a30}.app-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.icon-btn{width:48px;height:48px;border:1px solid #ffffff55;border-radius:14px;background:#ffffff12;color:white;font-size:24px;margin:0;padding:4px}.brand{text-align:center}.brand-name{font-size:30px;font-weight:900;color:#f5bd3f;letter-spacing:-1px}.brand-name span{color:#fff;font-size:20px}.brand-tag{font-size:12px;color:#fff;margin-top:3px}.market-prices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}.market-price{display:flex;align-items:center;gap:10px;min-width:0;padding:13px 10px;border-radius:17px;color:#14213d;box-shadow:0 4px 12px #0002}.gold-price{background:linear-gradient(135deg,#fff1c9,#f6d77f);border:1px solid #ffdf8a}.dollar-price{background:linear-gradient(135deg,#fff,#dce8ff);border:1px solid #c5d8ff}.price-symbol{font-size:30px;color:#b18419;font-weight:bold}.market-price span,.market-price small{display:block;font-size:11px}.market-price b{display:block;font-size:16px;margin:6px 0;overflow-wrap:anywhere}.market-price small{color:#65718a}.price-updated,.price-source{text-align:center;font-size:10px;color:#dbe4f7;margin:10px 0 0}.price-source{margin-top:4px}.source{color:#ffdb83}.main,main{max-width:850px;margin:auto;padding:16px}.search-wrap{position:relative;margin:16px 0 22px}.search-wrap input{height:58px;border:1px solid #d7ddef;border-radius:30px;background:#fff;padding:0 20px 0 55px;font-size:15px;box-shadow:0 4px 13px #172c5810}.search-icon{position:absolute;left:20px;top:4px;font-size:35px;color:#75809a}.section-title{display:flex;justify-content:space-between;align-items:center;margin:8px 3px 12px}.section-title h2{margin:0;font-size:18px;color:#12264b}.section-title span{font-size:10px;color:#8b93a6}.visual-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.category-tile{height:158px;border-radius:19px;overflow:hidden;position:relative;background:#0b2449;box-shadow:0 5px 13px #13264a20;cursor:pointer}.category-tile img{width:100%;height:112px;object-fit:cover;display:block}.category-tile b{height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:#09234a;color:white;font-size:14px}.category-tile i{font-style:normal;font-size:26px;color:#f6c34e}.ads-title{margin-top:27px}.all-ads{background:#e8edf8;color:#17315b;border:1px solid #d6dfef;margin:0 0 8px}.ad{border-radius:16px;box-shadow:0 4px 14px #14284c10}.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#071d40;border-top:2px solid #d9aa32;padding:7px 5px calc(7px + env(safe-area-inset-bottom));box-shadow:0 -5px 18px #071d4030}.nav-item{background:transparent;color:#fff;border-radius:0;margin:0;padding:4px 2px;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px}.nav-item span{font-size:25px;line-height:1.1}.nav-item.active{color:#f4bd3d}.add-nav span{width:44px;height:44px;border-radius:50%;background:#efb532;color:#fff;font-size:34px;display:flex;align-items:center;justify-content:center;margin-top:-22px;box-shadow:0 2px 8px #0003}.add-nav{color:#ffcf59}#auth,#form{scroll-margin-top:15px;border:1px solid #e1e6f0;box-shadow:0 6px 20px #11264a12}#form h2,#auth h2{color:#10264c}#message{position:relative;z-index:30}@media(min-width:700px){.visual-categories{grid-template-columns:repeat(3,minmax(0,1fr))}.category-tile{height:175px}.category-tile img{height:129px}.market-prices{max-width:680px;margin:22px auto 0}.app-header{padding-left:max(20px,calc((100% - 850px)/2));padding-right:max(20px,calc((100% - 850px)/2))}}
 </style>
 </head><body>
-<header>
-<div class="top">
-<div class="logo">بازاریکو 🛒</div>
-<div class="tag">یک بازار، همه معاملات</div>
-</div><div class="hero">
-<h1>بازار معاملات بزرگ ایران</h1>
-<p>از طلا و خودرو تا ملک، کارخانه و آهن؛ فرصت‌های خرید و فروش را یک‌جا پیدا کن.</p><div class="prices">
-<div class="price-card">
-<span>💵 دلار آزاد</span>
-<b id="usdPrice">در حال دریافت...</b>
-<span>تومان</span>
-</div>
-<div class="price-card">
-<span>🥇 طلای ۱۸ عیار</span>
-<b id="goldPrice">در حال دریافت...</b>
-<span>تومان / هر گرم</span>
-</div>
-</div><p class="small" id="priceUpdated">در حال دریافت زمان قیمت‌ها...</p>
-<p class="small">
-منبع قیمت‌ها:
-<a class="source" href="https://nerkhara.com" target="_blank" rel="noopener">نرخ‌آرا</a>
-</p>
-</div><button onclick="openBox('auth')">ورود / ثبت‌نام</button>
-<button onclick="openBox('form')">＋ ثبت آگهی</button>
-
-</header><main>
+<header class="app-header">
+ <div class="app-top">
+  <button class="icon-btn" aria-label="ورود" onclick="openBox('auth')">♙</button>
+  <div class="brand"><div class="brand-name">بازاریکو <span>◆</span></div><div class="brand-tag">یک بازار، همه معاملات</div></div>
+  <button class="icon-btn" aria-label="منو" onclick="openBox('auth')">☰</button>
+ </div>
+ <div class="market-prices">
+  <div class="market-price gold-price"><div class="price-symbol">▰</div><div><span>طلای ۱۸ عیار</span><b id="goldPrice">در حال دریافت...</b><small>تومان / هر گرم</small></div></div>
+  <div class="market-price dollar-price"><div class="price-symbol">＄</div><div><span>دلار آزاد</span><b id="usdPrice">در حال دریافت...</b><small>تومان</small></div></div>
+ </div>
+ <p class="price-updated" id="priceUpdated">در حال دریافت قیمت‌های بازار...</p>
+ <div class="price-source">منبع قیمت‌ها: <a class="source" href="https://nerkhara.com" target="_blank" rel="noopener">نرخ‌آرا</a></div>
+</header><main><main>
 <div id="message" class="hidden"></div><section id="auth" class="box hidden">
 <h2>ورود و ثبت‌نام با شماره موبایل</h2>
 <input id="phoneAuth" type="tel" placeholder="شماره موبایل، مثال: 09121234567">
@@ -83,18 +73,29 @@ footer{text-align:center;background:#101a35;color:white;padding:22px;margin-top:
 <input id="phone" type="tel" placeholder="شماره تماس">
 <textarea id="description" rows="4" placeholder="توضیحات آگهی"></textarea><label class="small" for="adPhotos">عکس‌های آگهی (حداکثر ۵ عکس، هر عکس تا ۵ مگابایت)</label><input id="adPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple><button id="submitAdBtn" onclick="submitAd()">ثبت آگهی</button>
 
-</section><h2>دسته‌بندی بازار</h2>
-<div class="categories">
-<div class="card" onclick="filterAds('خودرو')">🚗<b>خودرو</b></div>
-<div class="card" onclick="filterAds('ملک و زمین')">🏡<b>ملک و زمین</b></div>
-<div class="card" onclick="filterAds('طلا و جواهر')">🥇<b>طلا و جواهر</b></div>
-<div class="card" onclick="filterAds('کارخانه و کسب‌وکار')">🏭<b>کارخانه و کسب‌وکار</b></div>
-<div class="card" onclick="filterAds('آهن و فلزات')">🔩<b>آهن و فلزات</b></div>
-<div class="card" onclick="filterAds('اجاره ویلا')">🏖️<b>اجاره ویلا</b></div>
-</div><h2>آگهی‌های بازاریکو</h2>
-<input id="search" placeholder="جست‌وجو در آگهی‌ها..." oninput="loadAds()">
-<button onclick="filterAds('')">نمایش همه آگهی‌ها</button><div id="ads">در حال دریافت آگهی‌ها...</div>
-</main><footer>
+</section><section class="search-wrap">
+ <input id="search" placeholder="جست‌وجو در آگهی‌ها ..." oninput="loadAds()">
+ <span class="search-icon">⌕</span>
+</section>
+<div class="section-title"><h2>دسته‌بندی بازار</h2><span>همه معاملات، یک‌جا</span></div>
+<div class="categories visual-categories">
+ <div class="category-tile" onclick="filterAds('ملک و زمین')"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=85" alt="ملک و زمین"><b>ملک و زمین <i>‹</i></b></div>
+ <div class="category-tile" onclick="filterAds('خودرو')"><img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=700&q=85" alt="خودرو"><b>خودرو <i>‹</i></b></div>
+ <div class="category-tile" onclick="filterAds('کارخانه و کسب‌وکار')"><img src="https://images.unsplash.com/photo-1567789884554-0b844b597180?w=700&q=85" alt="کارخانه و کسب‌وکار"><b>کارخانه و کسب‌وکار <i>‹</i></b></div>
+ <div class="category-tile" onclick="filterAds('طلا و جواهر')"><img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=700&q=85" alt="طلا و جواهر"><b>طلا و جواهر <i>‹</i></b></div>
+ <div class="category-tile" onclick="filterAds('اجاره ویلا')"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=85" alt="اجاره ویلا"><b>اجاره ویلا <i>‹</i></b></div>
+ <div class="category-tile" onclick="filterAds('آهن و فلزات')"><img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=700&q=85" alt="آهن و فلزات"><b>آهن و فلزات <i>‹</i></b></div>
+</div>
+<div class="section-title ads-title"><h2>آگهی‌های بازاریکو</h2><span>جدیدترین فرصت‌ها</span></div>
+<button class="all-ads" onclick="filterAds('')">نمایش همه آگهی‌ها</button>
+<div id="ads">در حال دریافت آگهی‌ها...</div>
+</main>
+<nav class="bottom-nav">
+ <button class="nav-item active" onclick="filterAds('');window.scrollTo({top:0,behavior:'smooth'})"><span>⌂</span>بازاریکو</button>
+ <button class="nav-item" onclick="document.getElementById('search').focus();window.scrollTo({top:0,behavior:'smooth'})"><span>⌕</span>جست‌وجو</button>
+ <button class="nav-item" onclick="message('بخش نشان‌ها به‌زودی فعال می‌شود.')"><span>♧</span>نشان‌ها</button>
+ <button class="nav-item add-nav" onclick="openBox('form');document.getElementById('form').scrollIntoView({behavior:'smooth'})"><span>＋</span>ثبت آگهی</button>
+</nav><footer>
 بازاریکو | یک بازار، همه معاملات
 </footer><script>
 const SUPABASE_URL="https://qwcotdofymydhkndnhjf.supabase.co";
