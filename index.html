@@ -37,6 +37,40 @@ footer{text-align:center;background:#101a35;color:white;padding:22px;margin-top:
 
 /* طراحی تازه صفحه اصلی بازاریکو */
 body{background:#f1f3fb;color:#101d3b;padding-bottom:92px} .app-header{background:linear-gradient(145deg,#061a3d,#102e5d 75%,#183c70);color:#fff;padding:20px 16px 17px;border-bottom:4px solid #d9aa32;border-radius:0 0 24px 24px;box-shadow:0 8px 24px #10234a30}.app-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.icon-btn{width:48px;height:48px;border:1px solid #ffffff55;border-radius:14px;background:#ffffff12;color:white;font-size:24px;margin:0;padding:4px}.brand{text-align:center}.brand-name{font-size:30px;font-weight:900;color:#f5bd3f;letter-spacing:-1px}.brand-name span{color:#fff;font-size:20px}.brand-tag{font-size:12px;color:#fff;margin-top:3px}.market-prices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}.market-price{display:flex;align-items:center;gap:10px;min-width:0;padding:13px 10px;border-radius:17px;color:#14213d;box-shadow:0 4px 12px #0002}.gold-price{background:linear-gradient(135deg,#fff1c9,#f6d77f);border:1px solid #ffdf8a}.dollar-price{background:linear-gradient(135deg,#fff,#dce8ff);border:1px solid #c5d8ff}.price-symbol{font-size:30px;color:#b18419;font-weight:bold}.market-price span,.market-price small{display:block;font-size:11px}.market-price b{display:block;font-size:16px;margin:6px 0;overflow-wrap:anywhere}.market-price small{color:#65718a}.price-updated,.price-source{text-align:center;font-size:10px;color:#dbe4f7;margin:10px 0 0}.price-source{margin-top:4px}.source{color:#ffdb83}.main,main{max-width:850px;margin:auto;padding:16px}.search-wrap{position:relative;margin:16px 0 22px}.search-wrap input{height:58px;border:1px solid #d7ddef;border-radius:30px;background:#fff;padding:0 20px 0 55px;font-size:15px;box-shadow:0 4px 13px #172c5810}.search-icon{position:absolute;left:20px;top:4px;font-size:35px;color:#75809a}.section-title{display:flex;justify-content:space-between;align-items:center;margin:8px 3px 12px}.section-title h2{margin:0;font-size:18px;color:#12264b}.section-title span{font-size:10px;color:#8b93a6}.visual-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.category-tile{height:158px;border-radius:19px;overflow:hidden;position:relative;background:#0b2449;box-shadow:0 5px 13px #13264a20;cursor:pointer}.category-tile img{width:100%;height:112px;object-fit:cover;display:block}.category-tile b{height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:#09234a;color:white;font-size:14px}.category-tile i{font-style:normal;font-size:26px;color:#f6c34e}.ads-title{margin-top:27px}.all-ads{background:#e8edf8;color:#17315b;border:1px solid #d6dfef;margin:0 0 8px}.ad{border-radius:16px;box-shadow:0 4px 14px #14284c10}.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#071d40;border-top:2px solid #d9aa32;padding:7px 5px calc(7px + env(safe-area-inset-bottom));box-shadow:0 -5px 18px #071d4030}.nav-item{background:transparent;color:#fff;border-radius:0;margin:0;padding:4px 2px;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px}.nav-item span{font-size:25px;line-height:1.1}.nav-item.active{color:#f4bd3d}.add-nav span{width:44px;height:44px;border-radius:50%;background:#efb532;color:#fff;font-size:34px;display:flex;align-items:center;justify-content:center;margin-top:-22px;box-shadow:0 2px 8px #0003}.add-nav{color:#ffcf59}#auth,#form{scroll-margin-top:15px;border:1px solid #e1e6f0;box-shadow:0 6px 20px #11264a12}#form h2,#auth h2{color:#10264c}#message{position:relative;z-index:30}@media(min-width:700px){.visual-categories{grid-template-columns:repeat(3,minmax(0,1fr))}.category-tile{height:175px}.category-tile img{height:129px}.market-prices{max-width:680px;margin:22px auto 0}.app-header{padding-left:max(20px,calc((100% - 850px)/2));padding-right:max(20px,calc((100% - 850px)/2))}}
+
+/* چیدمان فشرده موبایل: نمایش همه دسته‌ها در یک صفحه */
+@media(max-width:600px){
+ .app-header{padding:9px 12px 10px;border-radius:0 0 15px 15px;border-bottom-width:3px}
+ .app-top{gap:6px}
+ .icon-btn{width:34px;height:34px;border-radius:10px;font-size:18px}
+ .brand-name{font-size:23px}
+ .brand-name span{font-size:15px}
+ .brand-tag{font-size:10px;margin-top:1px}
+ .market-prices{gap:7px;margin-top:9px}
+ .market-price{padding:6px 8px;border-radius:10px;gap:6px}
+ .price-symbol{font-size:21px}
+ .market-price span,.market-price small{font-size:9px}
+ .market-price b{font-size:13px;margin:2px 0}
+ .price-updated,.price-source{font-size:8px;margin-top:4px}
+ .main,main{padding:7px 10px}
+ .search-wrap{margin:7px 0 10px}
+ .search-wrap input{height:39px;font-size:12px;padding:0 14px 0 42px}
+ .search-icon{left:13px;top:0;font-size:28px}
+ .section-title{margin:5px 2px 7px}
+ .section-title h2{font-size:14px}
+ .section-title span{font-size:9px}
+ .visual-categories{gap:7px}
+ .category-tile{height:83px;border-radius:11px}
+ .category-tile img{height:55px}
+ .category-tile b{height:28px;padding:0 8px;font-size:11px}
+ .category-tile i{font-size:19px}
+ .ads-title{margin-top:13px}
+ .bottom-nav{padding:5px 4px calc(5px + env(safe-area-inset-bottom))}
+ .nav-item{font-size:9px;gap:1px}
+ .nav-item span{font-size:20px}
+ .add-nav span{width:36px;height:36px;font-size:27px;margin-top:-17px}
+}
+
 </style>
 </head><body>
 <header class="app-header">
