@@ -1,4 +1,4 @@
-const CACHE='bazariko-shell-v2';
+const CACHE='bazariko-shell-v3';
 const FILES=['./','./index.html','./manifest.webmanifest','./icon.svg'];
 
 self.addEventListener('install',event=>{
