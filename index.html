@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#101a35">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>بازاریکو | یک بازار، همه معاملات</title>
 <style>
 :root{color-scheme:light;--navy:#101a35;--navy2:#26395f;--gold:#d4af37;--ink:#17213b;--muted:#687084;--line:#e5e8ef}
@@ -207,6 +211,9 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:22px 10px}
  $("allAds").addEventListener("click",()=>{activeCategory="";$("search").value="";render();});
  render();
 })();
+</script>
+<script>
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {})); }
 </script>
 </body>
 </html>
