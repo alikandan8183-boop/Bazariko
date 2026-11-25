@@ -72,7 +72,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:22px 10px 90p
    <input id="loginPhone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" required placeholder="مثلاً 09xxxxxxxxx" aria-label="شماره موبایل">
    <button type="submit">ورود به بازاریکو</button>
   </form>
-  <small>ورود موقت است؛ فعلاً کد پیامک ارسال نمی‌شود و شماره تأیید نخواهد شد.</small>
+  <small>شماره فقط روی همین گوشی ذخیره می‌شود؛ ثبت‌نام آنلاین و پیامک هنوز فعال نیست.</small>
  </div>
 </div>
 
@@ -88,7 +88,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:22px 10px 90p
  <h2>دسته‌بندی بازار</h2>
  <div class="categories" id="categories">
   <button type="button" class="category" data-category="خودرو"><img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="تصویر خودرو" loading="lazy"><strong>خودرو</strong></button>
-  <button type="button" class="category" data-category="ملک و زمین"><img src="https://images.unsplash.com/photo-1600595958093-2bfbab7a7f?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="تصویر ملک و زمین" loading="lazy"><strong>ملک و زمین</strong></button>
+  <button type="button" class="category" data-category="ملک و زمین"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="تصویر ملک و زمین" loading="lazy"><strong>ملک و زمین</strong></button>
   <button type="button" class="category" data-category="طلا و جواهر"><img src="https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="تصویر طلا و جواهر" loading="lazy"><strong>طلا و جواهر</strong></button>
   <button type="button" class="category" data-category="کارخانه و کسب‌وکار"><img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="تصویر کارخانه" loading="lazy"><strong>کارخانه و کسب‌وکار</strong></button>
   <button type="button" class="category" data-category="آهن و فلزات"><img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="تصویر آهن و فلزات" loading="lazy"><strong>آهن و فلزات</strong></button>
@@ -123,18 +123,19 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:22px 10px 90p
 </nav>
 <section class="panel" id="saved-panel" hidden><h2>آگهی‌های نشان‌شده</h2><div class="ads" id="savedAds"></div></section>
 <section class="panel" id="inbox-panel" hidden><h2>چت و تماس آگهی‌ها</h2><p class="meta">از داخل هر آگهی می‌توانی پیام یا تماس را انتخاب کنی.</p><div class="ads" id="inboxAds"></div></section>
-<section class="panel" id="profile-panel" hidden><h2>پنل بازاریکو</h2><p>تنظیمات حساب و برنامه</p><div class="row"><button type="button" id="profileSettings">تنظیمات پروفایل</button><button type="button" id="profileSecurity" class="secondary">امنیت و ورود</button></div><div class="row"><button type="button" id="profileHelp" class="secondary">پشتیبانی</button></div><p id="profileInfo" class="meta">حساب فعلی با ورود آزمایشی فعال است؛ احراز هویت واقعی هنوز وصل نشده.</p></section>
+<section class="panel" id="profile-panel" hidden><h2>پنل بازاریکو</h2><p>تنظیمات حساب و برنامه</p><div class="row"><button type="button" id="profileSettings">تنظیمات پروفایل</button><button type="button" id="profileSecurity" class="secondary">امنیت و ورود</button></div><div class="row"><button type="button" id="profileHelp" class="secondary">پشتیبانی</button></div><p id="profileInfo" class="meta">شماره حساب این گوشی: " + (registeredPhone||"ثبت نشده") + "; ورود روی همین مرورگر باقی می‌ماند. ثبت‌نام سروری و پیامک هنوز فعال نیست.</p></section>
 <script>
 (function(){
- // ورود موقت: فقط تا پایان نشست همین مرورگر؛ شماره ذخیره نمی‌شود و تأیید هویت نیست.
+ // ورود محلی: شماره روی همین گوشی و مرورگر نگه داشته می‌شود؛ هنوز حساب سرور و تأیید پیامکی نیست.
  const loginOverlay=document.getElementById("loginOverlay");
- if(sessionStorage.getItem("bazariko_temp_login")==="yes") loginOverlay.hidden=true;
+ const registeredPhone=localStorage.getItem("bazariko_local_account_phone");
+ if(registeredPhone) loginOverlay.hidden=true;
  document.getElementById("phoneLoginForm").addEventListener("submit",function(e){
   e.preventDefault();
   const phone=document.getElementById("loginPhone").value.trim();
   const digits=phone.replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[^0-9]/g,"");
   if(digits.length<10||digits.length>15){alert("شماره موبایل را درست وارد کن.");return;}
-  sessionStorage.setItem("bazariko_temp_login","yes");
+  localStorage.setItem("bazariko_local_account_phone",digits);
   loginOverlay.hidden=true;
  });
 
