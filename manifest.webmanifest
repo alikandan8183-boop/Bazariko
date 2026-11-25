@@ -1,0 +1,20 @@
+{
+  "name": "بازاریکو | یک بازار، همه معاملات",
+  "short_name": "بازاریکو",
+  "description": "بازار خرید و فروش خودرو، ملک، طلا و کالاهای صنعتی",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f6fa",
+  "theme_color": "#101a35",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
