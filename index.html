@@ -48,7 +48,7 @@ button:disabled{opacity:.55}
 .price{font-weight:bold;color:#886713}
 .empty{background:#fff;border:1px dashed #cbd2df;border-radius:12px;text-align:center;padding:18px;color:var(--muted);font-size:13px}
 footer{text-align:center;color:var(--muted);font-size:11px;padding:22px 10px 90px}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:1000;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 5px calc(8px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #e2e6ee;box-shadow:0 -4px 18px #101a3510}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:1000;display:grid;grid-template-columns:repeat(5,1fr);padding:8px 5px calc(8px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #e2e6ee;box-shadow:0 -4px 18px #101a3510}
 .bottom-nav button{background:transparent;color:var(--navy);padding:5px 2px;font-size:11px;font-weight:normal;display:flex;flex-direction:column;align-items:center;gap:2px}
 .bottom-nav button span{font-size:21px;line-height:1.2}
 @media(min-width:620px){.categories{grid-template-columns:repeat(3,minmax(0,1fr))}form{grid-template-columns:1fr 1fr}form textarea,form button{grid-column:1/-1}.panel{padding:20px}}
@@ -115,11 +115,15 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:22px 10px 90p
 </main>
 <footer>بازاریکو | یک بازار، همه معاملات</footer>
 <nav class="bottom-nav" aria-label="منوی پایین">
- <button type="button" id="navChat"><span>💬</span>چت</button>
- <button type="button" id="navCall"><span>☎️</span>تماس</button>
- <button type="button" id="navHome"><span>⌂</span>خانه</button>
+ <button type="button" id="navAds"><span>▤</span>آگهی‌ها</button>
+ <button type="button" id="navSaved"><span>♡</span>نشان‌ها</button>
  <button type="button" id="navPost"><span>＋</span>ثبت آگهی</button>
+ <button type="button" id="navInbox"><span>✉</span>چت و تماس</button>
+ <button type="button" id="navProfile"><span>☰</span>بازاریکو</button>
 </nav>
+<section class="panel" id="saved-panel" hidden><h2>آگهی‌های نشان‌شده</h2><div class="ads" id="savedAds"></div></section>
+<section class="panel" id="inbox-panel" hidden><h2>چت و تماس آگهی‌ها</h2><p class="meta">از داخل هر آگهی می‌توانی پیام یا تماس را انتخاب کنی.</p><div class="ads" id="inboxAds"></div></section>
+<section class="panel" id="profile-panel" hidden><h2>پنل بازاریکو</h2><p>تنظیمات حساب و برنامه</p><div class="row"><button type="button" id="profileSettings">تنظیمات پروفایل</button><button type="button" id="profileSecurity" class="secondary">امنیت و ورود</button></div><div class="row"><button type="button" id="profileHelp" class="secondary">پشتیبانی</button></div><p id="profileInfo" class="meta">حساب فعلی با ورود آزمایشی فعال است؛ احراز هویت واقعی هنوز وصل نشده.</p></section>
 <script>
 (function(){
  // ورود موقت: فقط تا پایان نشست همین مرورگر؛ شماره ذخیره نمی‌شود و تأیید هویت نیست.
@@ -135,7 +139,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:22px 10px 90p
  });
 
  "use strict";
- const STORAGE_KEY="bazariko_demo_ads_v1";
+ const STORAGE_KEY="bazariko_demo_ads_v1";\n const SAVED_KEY="bazariko_saved_ad_ids_v1";\n let savedIds=[]; try{savedIds=JSON.parse(localStorage.getItem(SAVED_KEY)||"[]");if(!Array.isArray(savedIds))savedIds=[];}catch(e){savedIds=[];}
  const categories=["خودرو","ملک و زمین","طلا و جواهر","کارخانه و کسب‌وکار","آهن و فلزات","اجاره ویلا"];
  const $=id=>document.getElementById(id);
  let ads=[];
@@ -150,7 +154,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:22px 10px 90p
   catch(error){alert("ذخیره در این مرورگر ممکن نشد. فضای ذخیره‌سازی گوشی را بررسی کن.");return false;}
  }
  function cleanDigits(value){return String(value||"").replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[^0-9]/g,"");}
- function render(){
+ function renderSaved(){const box=$("savedAds");if(!box)return;box.replaceChildren();const items=ads.filter(ad=>savedIds.includes(ad.id));if(!items.length){const empty=document.createElement("div");empty.className="empty";empty.textContent="هنوز آگهی‌ای نشان نکرده‌ای.";box.append(empty);return;}items.slice().reverse().forEach(ad=>{const card=document.createElement("article");card.className="ad";const h=document.createElement("h3");h.textContent=ad.title;const p=document.createElement("p");p.textContent=[ad.category,ad.city,ad.price?Number(ad.price).toLocaleString("fa-IR")+" تومان":""].filter(Boolean).join(" • ");card.append(h,p);box.append(card);});}\n function renderInbox(){const box=$("inboxAds");box.replaceChildren();if(!ads.length){const empty=document.createElement("div");empty.className="empty";empty.textContent="با ثبت و دیدن آگهی‌ها، راه پیام و تماس اینجا نمایش داده می‌شود.";box.append(empty);return;}ads.slice().reverse().forEach(ad=>{const card=document.createElement("article");card.className="ad";const h=document.createElement("h3");h.textContent=ad.title;const row=document.createElement("div");row.className="row";const msg=document.createElement("button");msg.textContent="پیام به آگهی";msg.onclick=()=>alert("پیام‌رسان آنلاین هنوز فعال نیست.");const call=document.createElement("button");call.className="secondary";call.textContent="تماس با آگهی";call.onclick=()=>ad.phone?location.href="tel:"+cleanDigits(ad.phone):alert("شماره تماس ثبت نشده.");row.append(msg,call);card.append(h,row);box.append(card);});}\n function showPanel(id){["saved-panel","inbox-panel","profile-panel"].forEach(x=>$(x).hidden=x!==id);}\n function render(){
   const query=$("search").value.trim().toLocaleLowerCase("fa");
   const shown=ads.filter(ad=>{
    const matchesCategory=!activeCategory||ad.category===activeCategory;
@@ -173,7 +177,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:22px 10px 90p
     const description=document.createElement("p");description.textContent=ad.description||"بدون توضیحات";
     const price=document.createElement("p");price.className="price";
     price.textContent=ad.price?Number(ad.price).toLocaleString("fa-IR")+" تومان":"قیمت توافقی";
-    article.append(title,meta,description,price);
+    article.append(title,meta,description,price);\n    const actions=document.createElement("div");actions.className="row";\n    const saveBtn=document.createElement("button");saveBtn.type="button";saveBtn.className="secondary";saveBtn.textContent=savedIds.includes(ad.id)?"♥ نشان‌شده":"♡ ذخیره نشان";\n    saveBtn.addEventListener("click",()=>{savedIds=savedIds.includes(ad.id)?savedIds.filter(id=>id!==ad.id):savedIds.concat(ad.id);localStorage.setItem(SAVED_KEY,JSON.stringify(savedIds));saveBtn.textContent=savedIds.includes(ad.id)?"♥ نشان‌شده":"♡ ذخیره نشان";renderSaved();});\n    const chatBtn=document.createElement("button");chatBtn.type="button";chatBtn.textContent="پیام";chatBtn.addEventListener("click",()=>{alert("گفت‌وگوی آنلاین هنوز به سامانه پیام‌رسان وصل نشده؛ این بخش بعداً واقعی می‌شود.");});\n    const callBtn=document.createElement("button");callBtn.type="button";callBtn.className="secondary";callBtn.textContent="تماس";if(ad.phone){callBtn.onclick=()=>location.href="tel:"+cleanDigits(ad.phone);}else{callBtn.onclick=()=>alert("فروشنده شماره تماس ثبت نکرده است.");}\n    actions.append(saveBtn,chatBtn,callBtn);article.append(actions);
     if(ad.phone){
      const phone=document.createElement("p");phone.className="meta";phone.textContent="شماره تماس: "+ad.phone;article.append(phone);
     }
@@ -219,7 +223,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:22px 10px 90p
   });
  });
  $("allAds").addEventListener("click",()=>{activeCategory="";$("search").value="";render();});
- $("navHome").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+ $("navAds").addEventListener("click",()=>{showPanel("");activeCategory="";$("search").value="";render();window.scrollTo({top:0,behavior:"smooth"});});\n $("navSaved").addEventListener("click",()=>{showPanel("saved-panel");renderSaved();$("saved-panel").scrollIntoView({behavior:"smooth"});});\n $("navInbox").addEventListener("click",()=>{showPanel("inbox-panel");renderInbox();$("inbox-panel").scrollIntoView({behavior:"smooth"});});\n $("navProfile").addEventListener("click",()=>{showPanel("profile-panel");$("profile-panel").scrollIntoView({behavior:"smooth"});});\n $("profileSettings").onclick=()=>alert("تنظیمات پروفایل در نسخه بعدی تکمیل می‌شود.");\n $("profileSecurity").onclick=()=>alert("ورود فعلی آزمایشی است؛ امنیت و تأیید پیامکی هنوز پیاده‌سازی نشده.");\n $("profileHelp").onclick=()=>alert("راه ارتباط پشتیبانی هنوز ثبت نشده.");
  $("navPost").addEventListener("click",()=> $("form-panel").scrollIntoView({behavior:"smooth",block:"start"}));
  $("navChat").addEventListener("click",()=>alert("بخش گفت‌وگو به‌زودی فعال می‌شود."));
  $("navCall").addEventListener("click",()=>alert("شماره پشتیبانی بازاریکو هنوز ثبت نشده است."));
